@@ -1,7 +1,9 @@
 ConfigArgParse
+black
 requests
 dataset
 aiofiles
 fastapi
 fastapi-mail
+pytest
 uvicorn[standard]

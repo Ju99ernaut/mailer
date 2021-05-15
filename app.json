@@ -9,11 +9,23 @@
     "env": {
         "POOL_SIZE": {
             "description": "Connection pool size, keep the maximum number of connections in mind",
-            "value": "5"
+            "value": "10"
         },
         "MAX_OVERFLOW": {
             "description": "Connection pool maximum overflow, max_connections = pool_size + max_overflow",
-            "value": "2"
+            "value": "6"
+        },
+        "MAIL_USERNAME": {
+            "description": "email address for your sending confirmation email. If blank user emails wont be verified.",
+            "value": "user@example.com"
+        },
+        "MAIL_PASSWORD": {
+            "description": "Above email address password. If blank user emails wont be verified.",
+            "value": "d4h5bg5!J#$tmg&**IMyrWRc!#CFcg"
+        },
+        "FRONTEND_URLS": {
+            "description": "Whitelist frontend urls that can add emails to database",
+            "value": "https://front.end,https://front2.end"
         }
     }
 }
