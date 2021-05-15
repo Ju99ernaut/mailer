@@ -22,7 +22,7 @@ def repeat_every(
     wait_first: bool = False,
     logger: Optional[logging.Logger] = None,
     raise_exceptions: bool = False,
-    max_repetitions: Optional[int] = None
+    max_repetitions: Optional[int] = None,
 ) -> NoArgsNoReturnDecorator:
     """
     Returns decorator that modifies a function to be run periodically after it's first call
@@ -80,3 +80,29 @@ def repeat_every(
         return wrapped
 
     return decorator
+
+
+def prefix(pfx, dictionary):
+    """
+    Add prefix to assets, html, css, components, styles keys
+
+    Parameters
+    ----------
+    pfx: str
+        Storage prefix
+    dictionary: Dict
+        Dictionary object to filter
+    """
+
+    return {
+        **dictionary,
+        **{
+            f"{pfx}{k}": v
+            for k, v in dictionary.items()
+            if k == "assets"
+            or k == "html"
+            or k == "css"
+            or k == "components"
+            or k == "styles"
+        },
+    }

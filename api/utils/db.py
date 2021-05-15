@@ -27,11 +27,11 @@ def connect_db(function):
         if max_overflow:
             engine_kwargs["max_overflow"] = int(max_overflow)
 
-        try:
+        url = os.getenv("DATABASE_URL")
+        if not url:
             url = config.CONFIG.database_connection
-        except:
-            url = os.getenv("DATABASE_URL")
 
+        url = url.replace("postgres:", "postgresql:")
         global db
         if not db:
             db = dataset.connect(url, engine_kwargs=engine_kwargs)
