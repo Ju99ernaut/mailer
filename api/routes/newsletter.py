@@ -34,5 +34,5 @@ async def unregister_to_newsletter(
 @router.post("/post", response_model=Message)
 async def post_newsletter_to_mailing_list(post: Newsletter):
     mail_list = list(map(lambda row: row[EMAIL_KEY], data.get_all_emails()))
-    await newsletter(mail_list, post.subject, post.html)
+    await newsletter(mail_list, post.subject, post.body)
     return {"msg": "success"}

@@ -9,8 +9,8 @@ A REST API boilerplate project using `fastapi` and `dataset`, setup for easy dep
 Clone the repo
 
 ```sh
-$ git clone https://github.com/Ju99ernaut/super-fastapi.git
-$ cd superfast-api
+$ git clone https://github.com/Ju99ernaut/mailer.git
+$ cd mailer
 ```
 
 Create virtual enviroment
@@ -33,10 +33,15 @@ $ pip install -r requirements.txt`
 Run
 
 ```sh
-$ python api/main.py
+$ python api/main.py --mail_username user@gmail.com --mail_password password
 ```
 
-The API should now be available at `http://127.0.0.1:8000` and the API documentation will be available at `/docs` or `/redoc`.
+More config vars in `api/config.py` and enviroment vars in `app.json`.
+
+Update `grapesjs` init and plugins in `api/templates/editor.html`
+
+
+The API should now be available at `http://127.0.0.1:8000`, editor at `http://127.0.0.1:8000/editor` and the API documentation will be available at `/docs` or `/redoc`.
 
 Depending on the type of database backend, you may also need to install a database specific driver package. For MySQL, this is MySQLdb, for Postgres its psycopg2. SQLite support is integrated into Python.
 

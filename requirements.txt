@@ -4,4 +4,5 @@ dataset
 aiofiles
 fastapi
 fastapi-mail
+python-multipart
 uvicorn[standard]

@@ -22,7 +22,7 @@ class Template(BaseModel):
 
 class Newsletter(BaseModel):
     subject: Optional[str] = "Newsletter"
-    html: str
+    body: str
 
 
 class Email(BaseModel):

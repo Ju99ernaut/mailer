@@ -26,11 +26,11 @@ conf = ConnectionConfig(
 )
 
 
-async def newsletter(to: List[EmailStr], subject: str, html: str):
+async def newsletter(to: List[EmailStr], subject: str, body: str):
     message = MessageSchema(
         subject=subject,
         recipients=to,
-        body=html,
+        body=body,
         subtype="html",
     )
     if (os.getenv("MAIL_USERNAME") and os.getenv("MAIL_PASSWORD")) or (
