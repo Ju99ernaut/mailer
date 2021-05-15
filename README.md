@@ -1,6 +1,8 @@
-# Super FastAPI
+# Mailer
 
-A REST API boilerplate project using `fastapi` and `dataset`, setup for easy deployment on `heroku`.
+![Screenshot (220)](https://user-images.githubusercontent.com/48953676/118377550-34e14100-b5ce-11eb-9a02-704f9488d8bd.png)
+
+Grapesjs newsletter builder with REST API using `fastapi` and `dataset`, for storing and posting newsletter templates to email lists, setup for easy deployment on `heroku`.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
