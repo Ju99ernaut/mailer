@@ -16,8 +16,6 @@
     <script src="https://unpkg.com/grapesjs-preset-newsletter"></script>
     <script src="https://unpkg.com/grapesjs-template-manager"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
-    <script src="https://unpkg.com/ajaxable"></script>
 </head>
 <style>
     body,
@@ -534,7 +532,7 @@
     </div>
 
     <div id="send-form" style="display:none">
-        <form id="test-form" class="test-form" action="/newsletter/post" method="POST">
+        <form id="test-form" class="test-form">
             <div class="putsmail-c">
                 <div class="gjs-sm-property" style="font-size: 10px">
                     <span class="form-status" style="opacity: 0">
@@ -550,8 +548,7 @@
                     </span>
                 </div>
             </div>
-            <input type="hidden" name="body">
-            <button class="gjs-btn-prim gjs-btn-import" style="width: 100%">SEND</button>
+            <button id="btn-post-newsletter" class="gjs-btn-prim gjs-btn-import" style="width: 100%">SEND</button>
         </form>
     </div>
 
@@ -633,15 +630,12 @@
         var pnm = editor.Panels;
         var cmdm = editor.Commands;
         var testContainer = document.getElementById("send-form");
-        var contentEl = testContainer.querySelector('input[name=body]');
         var md = editor.Modal;
         cmdm.add('send-test', {
             run(editor, sender) {
                 sender.set('active', 0);
                 var modalContent = md.getContentEl();
                 var mdlDialog = document.querySelector('.gjs-mdl-dialog');
-                var cmdGetCode = cmdm.get('gjs-get-inlined-html');
-                contentEl.value = cmdGetCode && cmdGetCode.run(editor);
                 mdlDialog.className += ' ' + mdlClass;
                 md.setTitle('Post your Newsletter');
                 md.setContent('');
@@ -656,25 +650,39 @@
         });
 
         //fa fa-refresh
-        var statusFormElC = document.querySelector('.form-status');
-        var statusFormEl = document.querySelector('.form-status i');
-        var ajaxTest = ajaxable(testContainer.querySelector('form')).
-        onStart(function() {
-                statusFormEl.className = 'fa fa-refresh anim-spin';
-                statusFormElC.style.opacity = '1';
-                statusFormElC.className = 'form-status';
-            })
-            .onResponse(function(res) {
-                if (res.msg) {
-                    statusFormElC.style.opacity = '0';
-                    statusFormEl.removeAttribute('data-tooltip');
-                    md.close();
-                } else if (res.detail) {
-                    statusFormEl.className = 'fa fa-exclamation-circle';
-                    statusFormEl.setAttribute('data-tooltip', 'Failed to send newsletter');
-                    statusFormElC.className = 'form-status text-danger';
-                }
+        var statusFormElC = testContainer.querySelector('.form-status');
+        var statusFormEl = testContainer.querySelector('.form-status i');
+        //testContainer.querySelector('#btn-post-newsletter').addEventListener('click', sendNewsletter);
+        testContainer.querySelector('form').addEventListener('submit', function(ev) {
+            ev.preventDefault();
+            sendNewsletter();
+        });
+
+        function sendNewsletter() {
+            statusFormEl.className = 'fa fa-refresh anim-spin';
+            statusFormElC.style.opacity = '1';
+            statusFormElC.className = 'form-status';
+            var cmdGetCode = cmdm.get('gjs-get-inlined-html');
+            var body = JSON.stringify({
+                subject: testContainer.querySelector('input[name=subject]').value || 'Newsletter',
+                body: (cmdGetCode && cmdGetCode.run(editor)) || ''
             });
+            fetch('/newsletter/post', { method: 'POST', body })
+                .then(function(res) {
+                    return res.json();
+                })
+                .then(function(res) {
+                    if (res.msg) {
+                        statusFormElC.style.opacity = '0';
+                        statusFormEl.removeAttribute('data-tooltip');
+                        md.close();
+                    } else if (res.detail) {
+                        statusFormEl.className = 'fa fa-exclamation-circle';
+                        statusFormEl.setAttribute('data-tooltip', 'Failed to send newsletter');
+                        statusFormElC.className = 'form-status text-danger';
+                    }
+                })
+        }
 
         // Add info command
         var infoContainer = document.getElementById("info-cont");

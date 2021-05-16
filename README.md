@@ -6,6 +6,8 @@ Grapesjs newsletter builder with REST API using `fastapi` and `dataset`, for sto
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
+> :warning: No authentication system has been implemented yet, so this is only recommended for use on private servers
+
 ## Usage
 
 Clone the repo

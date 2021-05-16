@@ -29,7 +29,7 @@ arg_parser.add(
 
 arg_parser.add("-m", "--mail_port", default="587", help="email TSL port")
 
-arg_parser.add("-f", "--mail_from", default="App Listing", help="preffered from name")
+arg_parser.add("-f", "--mail_from", default="Newsletter", help="preffered from name")
 
 arg_parser.add("-s", "--mail_server", default="smtp.gmail.com", help="your mail server")
 
