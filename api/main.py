@@ -43,6 +43,7 @@ app.include_router(editor.router)
 async def root():
     return {
         "docs": "api documentation at /docs or /redoc",
+        "editor": "newsletter editor at /editor",
     }
 
 
