@@ -27,7 +27,18 @@ async def register_to_newsletter_querystring(
 
 
 @router.get("/unregister", response_model=Message)
-async def unregister_to_newsletter(
+async def unregister_to_newsletter(email: Email):
+    data.remove_email(email.email)
+    if data.get_email(email.email):
+        raise HTTPException(
+            status_code=status.HTTP_417_EXPECTATION_FAILED,
+            detail="Failed to unregister",
+        )
+    return {"msg": "success"}
+
+
+@router.get("/unregister", response_model=Message)
+async def unregister_to_newsletter_querystring(
     email: EmailStr = Query(..., description="Email to unregister")
 ):
     data.remove_email(email)
