@@ -3,7 +3,7 @@ import data
 from typing import List
 
 from uuid import UUID
-from fastapi import APIRouter, Depends, HTTPException, Path
+from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import EmailStr
 from models import Email, Message, Newsletter
 from mail.send import newsletter
@@ -18,9 +18,17 @@ async def register_to_newsletter(email: Email):
     return {"msg": "success"}
 
 
-@router.post("/unregister/{email}", response_model=Message)
+@router.get("/register", response_model=Message)
+async def register_to_newsletter_querystring(
+    email: EmailStr = Query(..., description="Email to register")
+):
+    data.add_email(email)
+    return {"msg": "success"}
+
+
+@router.get("/unregister", response_model=Message)
 async def unregister_to_newsletter(
-    email: EmailStr = Path(..., description="Email to unregister")
+    email: EmailStr = Query(..., description="Email to unregister")
 ):
     data.remove_email(email)
     if data.get_email(email):
