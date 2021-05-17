@@ -1,7 +1,5 @@
 import data
 
-from typing import List
-
 from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import EmailStr
@@ -26,7 +24,7 @@ async def register_to_newsletter_querystring(
     return {"msg": "success"}
 
 
-@router.get("/unregister", response_model=Message)
+@router.post("/unregister", response_model=Message)
 async def unregister_to_newsletter(email: Email):
     data.remove_email(email.email)
     if data.get_email(email.email):
