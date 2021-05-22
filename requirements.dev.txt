@@ -8,3 +8,5 @@ fastapi-mail
 python-multipart
 pytest
 uvicorn[standard]
+python-jose[cryptography]
+passlib[bcrypt]

@@ -5,4 +5,7 @@ aiofiles
 fastapi
 fastapi-mail
 python-multipart
+psycopg2
 uvicorn[standard]
+python-jose[cryptography]
+passlib[bcrypt]
