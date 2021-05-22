@@ -1,4 +1,4 @@
-from constants import EMAILS_TABLE, EMAIL_KEY, TEMPLATES_TABLE, IDX_KEY
+from constants import EMAILS_TABLE, TEMPLATES_TABLE, IDX_KEY
 
 from utils.db import connect_db
 
@@ -62,7 +62,7 @@ def get_all_templates(db):
 @connect_db
 def add_email(db, email):
     table = db[EMAILS_TABLE]
-    table.upsert({EMAIL_KEY: email}, [EMAIL_KEY])
+    table.upsert(email, [EMAIL_KEY])
 
 
 @connect_db
