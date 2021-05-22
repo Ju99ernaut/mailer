@@ -1,10 +1,10 @@
 import data
 
-from typing import List
+from typing import List, Optional
 
 from uuid import UUID
-from fastapi import APIRouter, Depends, HTTPException, Path, status
-from models import Template
+from fastapi import APIRouter, Depends, HTTPException, Path, Query, status
+from models import Template, Message
 from utils.tasks import prefix
 
 import config
@@ -17,9 +17,13 @@ router = APIRouter(
 
 
 @router.get("", response_model=List[Template])
-async def read_templates():
+async def read_templates(
+    page: Optional[int] = Query(0, minimum=0, description="Page number"),
+    size: Optional[int] = Query(50, maximum=100, description="Page size"),
+):
     return [
-        prefix(config.CONFIG.prefix, template) for template in data.get_all_templates()
+        prefix(config.CONFIG.prefix, template)
+        for template in data.get_all_templates(page, size)
     ]
 
 
@@ -48,10 +52,13 @@ async def add_template(
 
 @router.delete(
     "/{idx}",
-    response_model=List[Template],
+    response_model=Message,
 )
 async def delete_template_with_idx(idx: UUID = Path(..., description="Template UUID")):
     data.remove_template(idx)
-    return [
-        prefix(config.CONFIG.prefix, template) for template in data.get_all_templates()
-    ]
+    if data.get_template(idx):
+        raise HTTPException(
+            status_code=status.HTTP_417_EXPECTATION_FAILED,
+            detail="Template not deleted",
+        )
+    return {"msg": "success"}
