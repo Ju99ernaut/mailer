@@ -23,6 +23,7 @@ conf = ConnectionConfig(
     MAIL_TLS=True,
     MAIL_SSL=False,
     USE_CREDENTIALS=True,
+    TEMPLATE_FOLDER="./api/templates",
 )
 
 
@@ -38,3 +39,17 @@ async def newsletter(to: List[EmailStr], subject: str, body: str):
     ):
         fm = FastMail(conf)
         await fm.send_message(message)
+
+
+async def use_template(to: List[EmailStr], subject: str, body: dict, template: str):
+    message = MessageSchema(
+        subject=subject,
+        recipients=to,
+        body=body,
+        subtype="html",
+    )
+    if (os.getenv("MAIL_USERNAME") and os.getenv("MAIL_PASSWORD")) or (
+        config.CONFIG.mail_username and config.CONFIG.mail_password
+    ):
+        fm = FastMail(conf)
+        await fm.send_message(message, template=template)
