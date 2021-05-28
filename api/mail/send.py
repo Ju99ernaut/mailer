@@ -1,4 +1,5 @@
 import os
+import data
 
 from typing import List
 from pydantic import EmailStr
@@ -10,19 +11,28 @@ import config
 
 config.parse_args()
 
+current_config = data.get_campaign_config() or {
+    "MAIL_USERNAME": "",
+    "MAIL_PASSWORD": "",
+    "MAIL_FROM": "user@example.com",
+    "MAIL_PORT": 587,
+    "MAIL_SERVER": "smtp.gmail.com",
+    "MAIL_FROM_NAME": "Newsletter",
+    "MAIL_TLS": True,
+    "MAIL_SSL": False,
+    "USE_CREDENTIALS": True,
+}
 
 conf = ConnectionConfig(
-    MAIL_USERNAME=os.getenv("MAIL_USERNAME") or config.CONFIG.mail_username,
-    MAIL_PASSWORD=os.getenv("MAIL_PASSWORD") or config.CONFIG.mail_password,
-    MAIL_FROM=os.getenv("MAIL_USERNAME")
-    or config.CONFIG.mail_username
-    or "user@example.com",
-    MAIL_PORT=int(config.CONFIG.mail_port),
-    MAIL_SERVER=config.CONFIG.mail_server,
-    MAIL_FROM_NAME=config.CONFIG.mail_from,
-    MAIL_TLS=True,
-    MAIL_SSL=False,
-    USE_CREDENTIALS=True,
+    MAIL_USERNAME=current_config["MAIL_USERNAME"] or "",
+    MAIL_PASSWORD=current_config["MAIL_PASSWORD"] or "",
+    MAIL_FROM=current_config["MAIL_FROM"] or "user@example.com",
+    MAIL_PORT=current_config["MAIL_PORT"],
+    MAIL_SERVER=current_config["MAIL_SERVER"],
+    MAIL_FROM_NAME=current_config["MAIL_FROM_NAME"],
+    MAIL_TLS=current_config["MAIL_TLS"],
+    MAIL_SSL=current_config["MAIL_SSL"],
+    USE_CREDENTIALS=current_config["USE_CREDENTIALS"],
     TEMPLATE_FOLDER="./api/templates",
 )
 
