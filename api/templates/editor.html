@@ -675,7 +675,8 @@
             var cmdGetCode = cmdm.get('gjs-get-inlined-html');
             var body = JSON.stringify({
                 subject: testContainer.querySelector('input[name=subject]').value || 'Newsletter',
-                body: (cmdGetCode && cmdGetCode.run(editor)) || ''
+                body: (cmdGetCode && cmdGetCode.run(editor)) || '',
+                template: editor.Storage.getCurrentStorage().currentIdx
             });
             fetch('/newsletter/post', { method: 'POST', body })
                 .then(function(res) {
