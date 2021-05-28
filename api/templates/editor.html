@@ -11,10 +11,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <link rel="stylesheet" href="https://unpkg.com/grapesjs-preset-newsletter/dist/grapesjs-preset-newsletter.css">
     <link rel="stylesheet" href="https://unpkg.com/grapesjs-template-manager/dist/grapesjs-template-manager.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/grapesjs-component-code-editor/dist/grapesjs-component-code-editor.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/grapesjs-uppy/dist/grapesjs-uppy.min.css">
 
     <script src="https://unpkg.com/grapesjs"></script>
     <script src="https://unpkg.com/grapesjs-preset-newsletter"></script>
     <script src="https://unpkg.com/grapesjs-template-manager"></script>
+    <script src="https://unpkg.com/grapesjs-parser-postcss"></script>
+    <script src="https://unpkg.com/grapesjs-custom-code"></script>
+    <script src="https://unpkg.com/grapesjs-component-code-editor"></script>
+    <script src="https://unpkg.com/grapesjs-uppy"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </head>
 <style>
@@ -604,7 +610,7 @@
             },
             container: '#gjs',
             fromElement: true,
-            plugins: ['gjs-preset-newsletter', 'grapesjs-template-manager'],
+            plugins: ['gjs-preset-newsletter', 'grapesjs-template-manager', 'grapesjs-uppy', 'grapesjs-parser-postcss', 'grapesjs-component-code-editor', 'grapesjs-custom-code'],
             pluginsOpts: {
                 'gjs-preset-newsletter': {
                     modalLabelImport: 'Paste all your code here below and click import',
@@ -620,6 +626,10 @@
                         margin: 0,
                         padding: 0,
                     }
+                },
+                'grapesjs-uppy': {
+                    companionUrl: '{{companion_url}}' || 'https://companion.uppy.io',
+                    endpoint: '{{endpoint}}' || 'https://tusd.tusdemo.net/files/'
                 }
             }
         });
@@ -779,6 +789,15 @@
                 },
             }
         ]);
+        pnm.addButton('views', [{
+            attributes: {
+                title: 'Open Code'
+            },
+            className: 'fa fa-file-code-o',
+            command: 'open-code',
+            togglable: false, //do not close when button is clicked again
+            id: 'open-code'
+        }]);
 
         // Simple warn notifier
         var origWarn = console.warn;

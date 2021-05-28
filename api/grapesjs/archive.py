@@ -12,7 +12,7 @@ templates = Jinja2Templates(directory="api/templates")
 
 @router.get("", response_class=HTMLResponse)
 async def get_archive(request: Request):
-    campaigns = [campaign for campaign in data.get_all_campaigns()]
+    campaigns = [campaign for campaign in data.get_all_campaign_configs()]
     return templates.TemplateResponse(
         "archive.html", {"request": request, "campaigns": campaigns}
     )
