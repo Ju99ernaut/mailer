@@ -108,6 +108,12 @@ def get_all_emails(db, offset, limit):
 
 
 @connect_db
+def get_all_emails_unpaginated(db):
+    table = db[EMAILS_TABLE]
+    return table.find()
+
+
+@connect_db
 def add_uppy_config(db, config):
     table = db[UPPY_TABLE]
     config["id"] = 1

@@ -1,8 +1,6 @@
 """
  Constants useful for data module
 """
-from uuid import UUID
-
 
 TEMPLATES_TABLE = "templates"
 ASSETS_TABLE = "assets"

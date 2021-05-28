@@ -30,6 +30,18 @@
         margin: 0;
     }
 
+    .gjs-subject input {
+        color: inherit;
+        background-color: rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        width: calc(100% - 12px);
+        padding: 5px;
+    }
+
+    .gjs-subject input:focus {
+        outline: none
+    }
+
     .nl-link {
         color: inherit;
     }
@@ -547,12 +559,8 @@
                 </div>
             </div>
 
-            <div class="gjs-sm-property">
-                <div class="gjs-field">
-                    <span id="gjs-sm-input-holder">
-                        <input type="text" name="subject" placeholder="Subject" required>
-                    </span>
-                </div>
+            <div class="gjs-subject">
+                <input type="text" name="subject" placeholder="Subject" required>
             </div>
             <button id="btn-post-newsletter" class="gjs-btn-prim gjs-btn-import" style="width: 100%">SEND</button>
         </form>
@@ -641,7 +649,7 @@
         var cmdm = editor.Commands;
         var testContainer = document.getElementById("send-form");
         var md = editor.Modal;
-        cmdm.add('send-test', {
+        cmdm.add('send-nl', {
             run(editor, sender) {
                 sender.set('active', 0);
                 var modalContent = md.getContentEl();
@@ -678,7 +686,7 @@
                 body: (cmdGetCode && cmdGetCode.run(editor)) || '',
                 template: editor.Storage.getCurrentStorage().currentIdx
             });
-            fetch('/newsletter/post', { method: 'POST', body })
+            fetch('/campaigns/post', { method: 'POST', body })
                 .then(function(res) {
                     return res.json();
                 })
@@ -763,19 +771,10 @@
                 className: 'fa fa-trash',
                 command: 'delete-template', //Delete open page or template
                 id: 'delete-templates'
-            },
-            {
-                attributes: {
-                    title: 'Take Screenshot',
-                    'data-tooltip-pos': 'bottom',
-                },
-                className: 'fa fa-camera',
-                command: 'take-screenshot', //Take an image of the canvas
-                id: 'take-screenshot'
             }, {
-                id: 'send-test',
+                id: 'send-nl',
                 className: 'fa fa-paper-plane',
-                command: 'send-test',
+                command: 'send-nl',
                 attributes: {
                     'title': 'Post Newsletter',
                     'data-tooltip-pos': 'bottom',

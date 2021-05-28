@@ -1,4 +1,3 @@
-import os
 import data
 
 from typing import List
@@ -6,10 +5,6 @@ from pydantic import EmailStr
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
 
 # from fastapi_mail.email_utils import DefaultChecker
-
-import config
-
-config.parse_args()
 
 current_config = data.get_campaign_config() or {
     "MAIL_USERNAME": "",
@@ -44,9 +39,7 @@ async def newsletter(to: List[EmailStr], subject: str, body: str):
         body=body,
         subtype="html",
     )
-    if (os.getenv("MAIL_USERNAME") and os.getenv("MAIL_PASSWORD")) or (
-        config.CONFIG.mail_username and config.CONFIG.mail_password
-    ):
+    if current_config["MAIL_USERNAME"] and current_config["MAIL_PASSWORD"]:
         fm = FastMail(conf)
         await fm.send_message(message)
 
@@ -58,8 +51,6 @@ async def use_template(to: List[EmailStr], subject: str, body: dict, template: s
         body=body,
         subtype="html",
     )
-    if (os.getenv("MAIL_USERNAME") and os.getenv("MAIL_PASSWORD")) or (
-        config.CONFIG.mail_username and config.CONFIG.mail_password
-    ):
+    if current_config["MAIL_USERNAME"] and current_config["MAIL_PASSWORD"]:
         fm = FastMail(conf)
         await fm.send_message(message, template=template)
