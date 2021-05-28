@@ -3,7 +3,7 @@ import data
 from uuid import UUID
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Path, Query, status
-from models import Message, Newsletter, Campaign, CampaignConfig
+from models import Message, Newsletter, Campaign, CampaignRef, CampaignConfig
 from mail.send import newsletter
 from constants import EMAIL_KEY
 
@@ -52,10 +52,14 @@ async def delete_settings_and_credentials_for_newsletter(
 async def post_newsletter_to_mailing_list(post: Newsletter):
     mail_list = list(map(lambda row: row[EMAIL_KEY], data.get_all_emails()))
     await newsletter(mail_list, post.subject, post.body)
+    campaign = Campaign(
+        subject=post.subject, body=post.body, template=post.template, sent_to=mail_list
+    )
+    data.add_campaign(campaign.dict())
     return {"msg": "success"}
 
 
-@router.get("", response_model=List[Campaign])
+@router.get("", response_model=List[CampaignRef])
 async def get_all_campaigns(
     page: Optional[int] = Query(0, minimum=0, description="Page number"),
     size: Optional[int] = Query(50, maximum=100, description="Page size"),
@@ -63,7 +67,7 @@ async def get_all_campaigns(
     return [campaign for campaign in data.get_campaigns(page, size)]
 
 
-@router.get("/{uuid}", response_model=Campaign)
+@router.get("/{uuid}", response_model=CampaignRef)
 async def get_campaign_with_uuid(uuid: UUID = Path(..., description="Campaign UUID")):
     campaign = data.get_campaign(uuid)
     if not campaign:
