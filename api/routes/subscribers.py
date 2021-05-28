@@ -1,5 +1,6 @@
 import data
 
+from uuid import UUID
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Path, Query, status
 from models import Email, Message
@@ -15,36 +16,34 @@ async def read_subcribers(
     return [sub for sub in data.get_all_emails(page, size)]
 
 
-@router.get("/blocked", response_model=List[Email])
-async def read_blocked_subscribers(
+@router.get("/blacklisted", response_model=List[Email])
+async def read_blacklisted_subscribers(
     page: Optional[int] = Query(0, minimum=0, description="Page number"),
     size: Optional[int] = Query(50, maximum=100, description="Page size"),
 ):
     return [sub for sub in data.get_blocked_subscribers(page, size)]
 
 
-@router.get("/{id}", response_model=Email)
-async def read_subscriber_with_id(id: int = Path(..., description="Subscriber ID")):
-    subscriber = data.get_subscriber(id)
+@router.get("/{uuid}", response_model=Email)
+async def read_subscriber_with_id(
+    uuid: UUID = Path(..., description="Subscriber UUID")
+):
+    subscriber = data.get_subscriber(uuid)
     if not subscriber:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Template not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail="Subscriber not found"
         )
     return subscriber
 
 
-@router.get("/{id}/block", response_model=Message)
-async def block_subscriber_with_id(id: int = Path(..., description="Subscriber ID")):
-    data.block_subscriber(id)
-    return {"msg": "success"}
-
-
-@router.delete("/{id}", response_model=Message)
-async def delete_subscriber_with_id(id: int = Path(..., description="Subscriber ID")):
-    data.remove_subscriber(id)
-    if data.get_subscriber(id):
+@router.delete("/{uuid}", response_model=Message)
+async def delete_subscriber_with_id(
+    uuid: UUID = Path(..., description="Subscriber ID")
+):
+    data.remove_subscriber(uuid)
+    if data.get_subscriber(uuid):
         raise HTTPException(
             status_code=status.HTTP_417_EXPECTATION_FAILED,
-            detail="Failed to unregister",
+            detail="Failed to remove subscriber",
         )
     return {"msg": "success"}

@@ -1,5 +1,6 @@
 import data
 
+from uuid import UUID
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Path, Query, status
 from models import Message, Newsletter, Campaign, CampaignConfig
@@ -20,14 +21,14 @@ async def read_settings_and_credentials_for_newsletter(
     page: Optional[int] = Query(0, minimum=0, description="Page number"),
     size: Optional[int] = Query(50, maximum=100, description="Page size"),
 ):
-    return [config for config in data.get_all_configs(page, size)]
+    return [config for config in data.get_all_campaign_configs(page, size)]
 
 
-@router.get("/setups/{id}", response_model=CampaignConfig)
+@router.get("/setups/{uuid}", response_model=CampaignConfig)
 async def read_settings_and_credentials_for_newsletter_with_id(
-    id: int = Path(..., description="Config ID")
+    uuid: UUID = Path(..., description="Config UUID")
 ):
-    config = data.get_config(id)
+    config = data.get_campaign_config(uuid)
     if not config:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Config not found"
@@ -35,12 +36,12 @@ async def read_settings_and_credentials_for_newsletter_with_id(
     return config
 
 
-@router.delete("/setups/{id}", response_model=CampaignConfig)
+@router.delete("/setups/{uuid}", response_model=CampaignConfig)
 async def delete_settings_and_credentials_for_newsletter(
-    id: int = Path(..., description="Config ID")
+    uuid: UUID = Path(..., description="Config ID")
 ):
-    config = data.remove_config(id)
-    if data.get_config(id):
+    config = data.remove_campaign_config(uuid)
+    if data.get_campaign_config(uuid):
         raise HTTPException(
             status_code=status.HTTP_417_EXPECTATION_FAILED, detail="Config not deleted"
         )
@@ -62,9 +63,9 @@ async def get_all_campaigns(
     return [campaign for campaign in data.get_campaigns(page, size)]
 
 
-@router.get("/{id}", response_model=Campaign)
-async def get_campaign_with_id(id: int = Path(..., description="Campaign ID")):
-    campaign = data.get_campaign(id)
+@router.get("/{uuid}", response_model=Campaign)
+async def get_campaign_with_uuid(uuid: UUID = Path(..., description="Campaign UUID")):
+    campaign = data.get_campaign(uuid)
     if not campaign:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Campaign not found"

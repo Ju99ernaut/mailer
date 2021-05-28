@@ -3,7 +3,7 @@ from typing import List, Optional
 from uuid import UUID, uuid4
 from datetime import datetime
 from fastapi import Query
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, Field, EmailStr, AnyHttpUrl
 
 import config
 
@@ -35,6 +35,8 @@ class Status(str, Enum):
 
 
 class Email(BaseModel):
+    id: Optional[int] = None
+    uuid: UUID = Field(default_factory=uuid4)
     subscribed_at: datetime = Field(default_factory=datetime.utcnow)
     email: EmailStr
     status: Optional[Status] = "enabled"
@@ -50,13 +52,14 @@ class Asset(BaseModel):
     created_at: datetime = Field(default_factory=datetime.utcnow)
     type: Optional[str] = None
     filename: Optional[str] = None
-    src: str
+    src: AnyHttpUrl
     width: Optional[int] = None
     height: Optional[int] = None
 
 
 class Campaign(BaseModel):
     id: Optional[int] = None
+    uuid: UUID = Field(default_factory=uuid4)
     sent_at: datetime = Field(default_factory=datetime.utcnow)
     subject: str
     body: str
@@ -66,6 +69,7 @@ class Campaign(BaseModel):
 
 class CampaignConfig(BaseModel):
     id: Optional[int] = None
+    uuid: UUID = Field(default_factory=uuid4)
     MAIL_USERNAME: str
     MAIL_PASSWORD: str
     MAIL_FROM: EmailStr
@@ -75,3 +79,9 @@ class CampaignConfig(BaseModel):
     MAIL_TLS: Optional[bool] = True
     MAIL_SSL: Optional[bool] = False
     USE_CREDENTIALS: Optional[bool] = True
+
+
+class UppyConfig(BaseModel):
+    id: Optional[int] = None
+    companion_url: Optional[AnyHttpUrl] = None
+    endpoint: Optional[AnyHttpUrl] = None

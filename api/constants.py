@@ -1,12 +1,19 @@
 """
  Constants useful for data module
 """
+from uuid import UUID
+
+
 TEMPLATES_TABLE = "templates"
 ASSETS_TABLE = "assets"
 EMAILS_TABLE = "emails"
+UPPY_TABLE = "uppy"
+CAMPAIGNS_TABLE = "campaigns"
+CONFIG_TABLE = "config"
 
 ASSETS_KEY = "assets"
 IDX_KEY = "idx"
+UUID_KEY = "uuid"
 TEMPLATE_KEY = "template"
 THUMBNAIL_KEY = "thumbnail"
 HTML_KEY = "html"
