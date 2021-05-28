@@ -1,9 +1,10 @@
 from enum import Enum
-from typing import List, Optional
+from typing import List, Optional, Union
 from uuid import UUID, uuid4
 from datetime import datetime
 from fastapi import Query
 from pydantic import BaseModel, Field, EmailStr, AnyHttpUrl
+from pydantic.class_validators import validator
 
 import config
 
@@ -26,6 +27,7 @@ class Template(BaseModel):
 class Newsletter(BaseModel):
     subject: Optional[str] = "Newsletter"
     body: str
+    template: UUID = Field(default_factory=uuid4)
 
 
 class Status(str, Enum):
@@ -58,13 +60,34 @@ class Asset(BaseModel):
 
 
 class Campaign(BaseModel):
+    uuid: UUID = Field(default_factory=uuid4)
+    sent_at: datetime = Field(default_factory=datetime.utcnow)
+    subject: str
+    body: str
+    template: UUID = Field(default_factory=uuid4)
+    sent_to: Union[List[EmailStr], str]
+
+    @validator("sent_to")
+    def stringify(cls, v):
+        if type(v) == list:
+            return ",".join(v)
+        return v
+
+
+class CampaignRef(BaseModel):
     id: Optional[int] = None
     uuid: UUID = Field(default_factory=uuid4)
     sent_at: datetime = Field(default_factory=datetime.utcnow)
     subject: str
     body: str
     template: UUID = Field(default_factory=uuid4)
-    sent_to: List[EmailStr]
+    sent_to: Union[List[EmailStr], str]
+
+    @validator("sent_to")
+    def listify(cls, v):
+        if type(v) == str:
+            return v.split(",")
+        return v
 
 
 class CampaignConfig(BaseModel):

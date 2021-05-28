@@ -54,9 +54,9 @@ def get_template(db, idx):
 
 
 @connect_db
-def get_all_templates(db):
+def get_all_templates(db, offset, limit):
     table = db[TEMPLATES_TABLE]
-    return table.all()
+    return table.find()
 
 
 @connect_db
@@ -81,7 +81,7 @@ def get_email(db, email):
 
 
 @connect_db
-def get_blocked_subscribers(db):
+def get_blocked_subscribers(db, offset, limit):
     table = db[EMAILS_TABLE]
     return table.find(status="blacklisted")
 
@@ -102,9 +102,9 @@ def get_subscriber(db, uuid):
 
 
 @connect_db
-def get_all_emails(db):
+def get_all_emails(db, offset, limit):
     table = db[EMAILS_TABLE]
-    return table.all()
+    return table.find()
 
 
 @connect_db
@@ -146,15 +146,16 @@ def get_asset(db, uuid):
 
 
 @connect_db
-def get_all_assets(db):
+def get_all_assets(db, offset, limit):
     table = db[ASSETS_TABLE]
-    return table.all()
+    return table.find()
 
 
 @connect_db
 def add_campaign(db, campaign):
     table = db[CAMPAIGNS_TABLE]
     campaign[UUID_KEY] = str(campaign[UUID_KEY])
+    campaign[TEMPLATE_KEY] = str(campaign[TEMPLATE_KEY])
     table.upsert(campaign, [UUID_KEY])
 
 
@@ -168,9 +169,9 @@ def get_campaign(db, uuid):
 
 
 @connect_db
-def get_all_campaigns(db):
+def get_all_campaigns(db, offset, limit):
     table = db[CAMPAIGNS_TABLE]
-    return table.all()
+    return table.find()
 
 
 @connect_db
@@ -196,6 +197,15 @@ def get_campaign_config(db, uuid):
 
 
 @connect_db
-def get_all_campaign_configs(db):
+def get_campaign_config_default(db):
     table = db[CONFIG_TABLE]
-    return table.all()
+    row = table.find_one(id=id)
+    if row is not None:
+        return row
+    return None
+
+
+@connect_db
+def get_all_campaign_configs(db, offset, limit):
+    table = db[CONFIG_TABLE]
+    return table.find()
