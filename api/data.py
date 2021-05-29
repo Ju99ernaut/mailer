@@ -181,6 +181,12 @@ def get_all_campaigns(db, offset, limit):
 
 
 @connect_db
+def get_all_campaigns_unpaginated(db):
+    table = db[CAMPAIGNS_TABLE]
+    return table.find()
+
+
+@connect_db
 def add_campaign_config(db, config):
     table = db[CONFIG_TABLE]
     config[UUID_KEY] = str(config[UUID_KEY])

@@ -64,7 +64,7 @@ async def get_all_campaigns(
     page: Optional[int] = Query(0, minimum=0, description="Page number"),
     size: Optional[int] = Query(50, maximum=100, description="Page size"),
 ):
-    return [campaign for campaign in data.get_campaigns(page, size)]
+    return [campaign for campaign in data.get_all_campaigns(page, size)]
 
 
 @router.get("/{uuid}", response_model=CampaignRef)

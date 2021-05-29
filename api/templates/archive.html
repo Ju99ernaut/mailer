@@ -12,8 +12,8 @@
 <body>
     <div class="archive">
         {% for campaign in campaigns %}
-        <a href="{{items.uuid}}">
-            <li>{{campaign.sent_at | datetimefilter}} - {{campaign.subject}} </li>
+        <a href="/viewer/{{campaign.uuid}}">
+            <li>{{campaign.uuid}} - {{campaign.sent_at}} - {{campaign.subject}} </li>
         </a>
         {% endfor %}
     </div>

@@ -15,7 +15,7 @@ templates = Jinja2Templates(directory="api/templates")
 async def get_viewer(
     request: Request, uuid: UUID = Path(..., description="Campaign ID")
 ):
-    campaign = data.get_campaign_config(uuid)
+    campaign = data.get_campaign(uuid)
     return templates.TemplateResponse(
         "browser_view.html",
         {"request": request, "subject": campaign["subject"], "body": campaign["body"]},
