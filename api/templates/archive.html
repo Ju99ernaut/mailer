@@ -5,18 +5,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/archive.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/archve.css') }}">
     <title>Email Archive</title>
 </head>
 
 <body>
     <div class="archive">
         <h1>Newsletter Archive</h1>
-        {% for campaign in campaigns %}
-        <a href="/viewer/{{campaign.uuid}}">
-            {{campaign.uuid}} - {{campaign.sent_at}} - {{campaign.subject}}
-        </a>
-        {% endfor %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>UUID</th>
+                    <th>Sent At</th>
+                    <th>Subject</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for campaign in campaigns %}
+                <tr>
+                    <td><a href="/viewer/{{campaign.uuid}}">{{campaign.uuid}}</a></td>
+                    <td>{{campaign.sent_at}}</td>
+                    <td><b>{{campaign.subject}}</b></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </body>
 
