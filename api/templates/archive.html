@@ -11,9 +11,10 @@
 
 <body>
     <div class="archive">
+        <h1>Newsletter Archive</h1>
         {% for campaign in campaigns %}
         <a href="/viewer/{{campaign.uuid}}">
-            <li>{{campaign.uuid}} - {{campaign.sent_at}} - {{campaign.subject}} </li>
+            {{campaign.uuid}} - {{campaign.sent_at}} - {{campaign.subject}}
         </a>
         {% endfor %}
     </div>

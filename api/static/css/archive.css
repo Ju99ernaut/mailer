@@ -1,0 +1,13 @@
+.archive {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid rgba(0, 0, 0, 0.2);
+    padding: 5rem;
+}
+
+a {
+    text-decoration: none;
+    padding: .5rem;
+}
