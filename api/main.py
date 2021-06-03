@@ -56,4 +56,9 @@ async def root():
 
 if __name__ == "__main__":
     data.setup()
-    uvicorn.run("main:app", host=config.CONFIG.host, port=int(config.CONFIG.port))
+    uvicorn.run(
+        "main:app",
+        host=config.CONFIG.host,
+        port=int(config.CONFIG.port),
+        reload=bool(config.CONFIG.reload),
+    )
