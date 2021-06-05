@@ -61,12 +61,15 @@ body {
     animation: left 1s var(--delay) both;
 }
 
-.left-side svg {
+.left-side svg,
+.left-side a {
     width: 24px;
     cursor: pointer;
+    color: #9b9ca7;
 }
 
-.left-side svg+svg {
+.left-side svg+svg,
+.left-side a+a {
     margin-top: 34px;
 }
 
