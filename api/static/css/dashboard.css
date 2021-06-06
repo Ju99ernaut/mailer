@@ -39,6 +39,73 @@ body {
     overflow: hidden;
 }
 
+label {
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: 500;
+    width: 100%;
+    display: block;
+    user-select: none;
+}
+
+input {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    box-shadow: none;
+    border: 1px solid #4255d4;
+    transition: all 0.3s ease-in-out;
+    font-size: 18px;
+    padding: 5px 15px;
+    background: none;
+    font-family: "Source Sans Pro", sans-serif;
+    color: inherit;
+}
+
+input:hover,
+input:focus {
+    border-color: #3d9cff;
+}
+
+input:focus {
+    box-shadow: 0px 10px 20px -13px rgba(32, 56, 117, 0.35);
+}
+
+input.-select {
+    -webkit-appearance: none;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAeCAYAAABuUU38AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAUxJREFUeNrM1sEJwkAQBdCsngXPHsQO9O5FS7AAMVYgdqAd2IGCDWgFnryLFQiCZ8EGnJUNimiyM/tnk4HNEAg/8y6ZmMRVqz9eUJvRaSbvutCZ347bXVJy/ZnvTmdJ862Me+hAbZCTs6GHpyUi1tTSvPnqTpoWZPUa7W7ncT3vK4h4zVejy8QzM3WhVUO8ykI6jOxoGA4ig3BLHcNFSCGqGAkig2yqgpEiMsjSfY9LxYQg7L6r0X6wS29YJiYQYecemY+wHrXD1+bklGhpAhBDeu/JfIVGxaAQ9sb8CI+CQSJ+QmJg0Ii/EE2MBiIXooHRQhRCkBhNhBcEhLkwf05ZCG8ICCOpk0MULmvDSY2M8UawIRExLIQIEgHDRoghihgRIgiigBEjgiFATBACAgFgghEwSAAGgoBCBBgYAg5hYKAIFYgHBo6w9RRgAFfy160QuV8NAAAAAElFTkSuQmCC");
+    background-size: 12px;
+    background-position: 90% center;
+    background-repeat: no-repeat;
+    padding-right: 30px;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: 1px solid #9b9ca7;
+    vertical-align: middle;
+    background-color: transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 16px;
+    transition: 0.25s;
+    background-size: 0;
+    background-position: center;
+}
+
+input:checked {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' stroke='%23fff' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' class='css-i6dzq1'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    background-color: #252954;
+    background-size: 12px;
+    background-repeat: no-repeat;
+}
+
 .wrapper {
     max-width: 1600px;
     background-color: #0e0e23;
@@ -305,6 +372,10 @@ body {
 .user-box .cards-header .date-wrapper .title,
 .user-box .cards-view .date-wrapper .title {
     margin: 0 16px;
+}
+
+.fourth-box .card {
+    max-height: 1500px;
 }
 
 .cards-view>svg {
