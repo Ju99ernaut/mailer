@@ -54,6 +54,15 @@ def get_template(db, idx):
 
 
 @connect_db
+def get_default_template(db):
+    table = db[TEMPLATES_TABLE]
+    row = table.find_one(id="Default")
+    if row is not None:
+        return row
+    return None
+
+
+@connect_db
 def get_all_templates(db, offset, limit):
     table = db[TEMPLATES_TABLE]
     return table.find()
@@ -184,6 +193,11 @@ def get_all_campaigns(db, offset, limit):
 def get_all_campaigns_unpaginated(db):
     table = db[CAMPAIGNS_TABLE]
     return table.find()
+
+
+@connect_db
+def get_campaign_count(db):
+    return len(db[CAMPAIGNS_TABLE])
 
 
 @connect_db

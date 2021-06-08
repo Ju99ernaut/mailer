@@ -295,6 +295,7 @@ input:checked {
     padding: 2px 12px;
     border-radius: 4px;
     margin-right: 20px;
+    cursor: pointer;
 }
 
 .button svg {
@@ -356,6 +357,11 @@ input:checked {
     margin-right: 0;
 }
 
+.user-box .cards-header .cards-button:hover,
+.user-box .cards-view .cards-button:hover {
+    background: #363669;
+}
+
 .user-box .cards-header .cards-button svg,
 .user-box .cards-view .cards-button svg {
     width: 16px;
@@ -372,6 +378,10 @@ input:checked {
 .user-box .cards-header .date-wrapper .title,
 .user-box .cards-view .date-wrapper .title {
     margin: 0 16px;
+}
+
+.third-box {
+    padding-bottom: 50px;
 }
 
 .fourth-box .card {
@@ -533,6 +543,12 @@ input:checked {
     margin-top: 30px;
 }
 
+svg.profile-img {
+    width: 100px;
+    height: 50px;
+    border-radius: 5px;
+}
+
 .profile-img {
     width: 46px;
     height: 46px;
@@ -564,6 +580,10 @@ input:checked {
     margin-bottom: 30px;
 }
 
+.third-box .discount .title {
+    margin-bottom: 0;
+}
+
 .discount .subtitle {
     margin-bottom: 8px;
 }
@@ -593,15 +613,22 @@ input:checked {
 .discount-profile {
     display: flex;
     align-items: center;
-    margin-top: 40px;
+    margin-top: 25px;
 }
 
 .discount-img {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
+    width: 150px;
+    height: 100px;
+    border-radius: 15px;
     -o-object-fit: cover;
     object-fit: cover;
+    margin: 0 16px 0 12px
+}
+
+.third-box .discount-img {
+    width: 220px;
+    height: 220px;
+    border-radius: 15px;
     margin: 0 16px 0 12px;
 }
 
@@ -673,6 +700,10 @@ input:checked {
     color: #fff;
     font-size: 13px;
     cursor: pointer;
+}
+
+.offer-button:hover {
+    background: #5e71eb;
 }
 
 .cards-header {

@@ -16,14 +16,18 @@ async def get_dashboard(request: Request):
     campaigns = data.get_all_campaigns_unpaginated()
     subscribers = data.get_all_emails_unpaginated()
     uppy_config = data.get_uppy_config()
+    total_campaigns = data.get_campaign_count()
+    default_template = data.get_default_template()
     return templates.TemplateResponse(
         "dashboard.html",
         {
             "request": request,
             "user": {"username": "username"},
             "campaign_config": campaign_config,
-            "campaigns": campaigns,
-            "subscribers": subscribers,
+            "campaigns": [campaign for campaign in campaigns],
+            "subscribers": [subscriber for subscriber in subscribers],
             "uppy_config": uppy_config,
+            "total_campaigns": total_campaigns,
+            "default_template": default_template,
         },
     )

@@ -54,7 +54,7 @@
                     <div class="link-text">Uppy</div>
                 </a>
                 <div class="user-info">
-                    <div class="user-name">Username</div>
+                    <div class="user-name">{{user.username}}</div>
                     <svg class="profile" viewBox="-42 0 512 512" fill="currentColor">
                         <path d="M210.4 246.6c33.8 0 63.2-12.1 87.1-36.1 24-24 36.2-53.3 36.2-87.2 0-33.9-12.2-63.2-36.2-87.2-24-24-53.3-36.1-87.1-36.1-34 0-63.3 12.2-87.2 36.1S87 89.4 87 123.3c0 33.9 12.2 63.2 36.2 87.2 24 24 53.3 36.1 87.2 36.1zm-66-189.3a89.1 89.1 0 0166-27.3c26 0 47.5 9 66 27.3a89.2 89.2 0 0127.3 66c0 26-9 47.6-27.4 66a89.1 89.1 0 01-66 27.3c-26 0-47.5-9-66-27.3a89.1 89.1 0 01-27.3-66c0-26 9-47.6 27.4-66zm0 0M426.1 393.7a304.6 304.6 0 00-12-64.9 160.7 160.7 0 00-13.5-30.3c-5.7-10.2-12.5-19-20.1-26.3a88.9 88.9 0 00-29-18.2 100.1 100.1 0 00-37-6.7c-5.2 0-10.2 2.2-20 8.5-6 4-13 8.5-20.9 13.5-6.7 4.3-15.8 8.3-27 11.9a107.3 107.3 0 01-66 0 119.3 119.3 0 01-27-12l-21-13.4c-9.7-6.3-14.8-8.5-20-8.5a100 100 0 00-37 6.7 88.8 88.8 0 00-29 18.2 114.4 114.4 0 00-20.1 26.3 161 161 0 00-13.4 30.3A302.5 302.5 0 001 393.7c-.7 9.8-1 20-1 30.2 0 26.8 8.5 48.4 25.3 64.4C41.8 504 63.6 512 90.3 512h246.5c26.7 0 48.6-8 65.1-23.7 16.8-16 25.3-37.6 25.3-64.4a437 437 0 00-1-30.2zm-44.9 72.8c-11 10.4-25.4 15.5-44.4 15.5H90.3c-19 0-33.4-5-44.4-15.5C35.2 456.3 30 442.4 30 424c0-9.5.3-19 1-28.1A272.9 272.9 0 0141.7 338a131 131 0 0110.9-24.7A84.8 84.8 0 0167.4 294a59 59 0 0119.3-12 69 69 0 0123.6-4.5c1 .5 3 1.6 6 3.6l21 13.6c9 5.6 20.4 10.7 34 15.1a137.3 137.3 0 0084.5 0c13.7-4.4 25.1-9.5 34-15.1a2721 2721 0 0027-17.2 69 69 0 0123.7 4.5 59 59 0 0119.2 12 84.5 84.5 0 0114.9 19.4c4.5 8 8.2 16.3 10.8 24.7a275.2 275.2 0 0110.8 57.8c.6 9 1 18.5 1 28.1 0 18.5-5.3 32.4-16 42.6zm0 0" /></svg>
                     <div class="hour">08.20 pm</div>
@@ -69,10 +69,18 @@
                         <div class="activity-link notify">Drafts</div>
                     </div>
                     <div class="destination">
+                        {% for campaign in campaigns %}
                         <div class="destination-card">
                             <div class="destination-profile">
-                                <img class="profile-img" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80" alt="" />
-                                <!--<div class="destination-length">
+                                <svg class="profile-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 1100">
+                                    <foreignObject width="100%" height="100%" style="pointer-events: none">
+                                        <div xmlns="http://www.w3.org/1999/xhtml">
+                                            {{campaign.body | safe}}
+                                        </div>
+                                    </foreignObject>
+                                </svg>
+                                <!--<img class="profile-img" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80" alt="" />
+                                <div class="destination-length">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin">
                                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
                                         <circle cx="12" cy="10" r="3" />
@@ -81,26 +89,11 @@
                                 </div>-->
                             </div>
                             <div class="destination-points">
-                                <div class="point">Subject</div>
-                                <div class="sub-point">Template UUID</div>
+                                <div class="point">{{campaign.subject}}</div>
+                                <div class="sub-point">Template: {{campaign.template}}</div>
                             </div>
                         </div>
-                        <div class="destination-card">
-                            <div class="destination-profile">
-                                <img class="profile-img" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80" alt="" />
-                                <!--<div class="destination-length">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin">
-                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                                        <circle cx="12" cy="10" r="3" />
-                                    </svg>
-                                    42.8m
-                                </div>-->
-                            </div>
-                            <div class="destination-points">
-                                <div class="point">Subject</div>
-                                <div class="sub-point">Template UUID</div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="discount card" style="--delay: .4s">
@@ -108,9 +101,13 @@
                     <div class="discount-wrapper">
                         <div class="discount-info">
                             <div class="subtitle">This is the default template in the editor:</div>
-                            <div class="subtitle-count">Template name</div>
+                            <div class="subtitle-count">{{default_template.id}}</div>
                             <div class="subtitle">Is template:</div>
+                            {% if default_template.template %}
                             <div class="subtitle-count dist">True</div>
+                            {% else %}
+                            <div class="subtitle-count">False</div>
+                            {% endif %}
                         </div>
                         <div class="discount-chart">
                             <div class="circle">
@@ -125,13 +122,26 @@
                     </div>
                     <div class="discount-profile">
                         <!--<span class="by">By:</span>-->
-                        <img class="discount-img" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80" alt="">
+                        <!--<svg class="discount-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 1100">
+                            <foreignObject width="100%" height="100%" style="pointer-events: none">
+                                <div xmlns="http://www.w3.org/1999/xhtml">
+                                    {default_template.html | safe}
+                                    <style scoped>
+                                    {default_template.css}
+                                    </style>
+                                </div>
+                            </foreignObject>
+                        </svg>-->
+                        <!--<img class="discount-img" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80" alt="">-->
+                        <div class="discount-img" style="background-color: rgba(0 , 0, 0, 0.1);"></div>
                         <div class="discount-detail">
-                            <div class="discount-name">Template Name</div>
+                            <div class="discount-name">{{default_template.idx}}</div>
                             <!--<div class="discount-type">Micro bus & Travel Bus</div>-->
                         </div>
                     </div>
-                    <div class="button offer-button">Open in Editor</div>
+                    <a href="/editor">
+                        <div class="button offer-button">Open in Editor</div>
+                    </a>
                 </div>
                 <div class="cards-wrapper" style="--delay: .6s">
                     <div class="cards-header">
@@ -204,12 +214,12 @@
                             <div class="blob"></div>
                             <div class="blob"></div>
                         </div>
-                        <div class="account-name">Username</div>
+                        <div class="account-name">{{user.username}}</div>
                         <div class="account-title">Admin</div>
                     </div>
                     <div class="account card">
                         <div class="account-cash">Total Campaigns</div>
-                        <div class="account-income">30</div>
+                        <div class="account-income">{{total_campaigns}}</div>
                         <!--<div class="account-iban">30</div>-->
                     </div>
                 </div>
@@ -244,97 +254,41 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for subscriber in subscribers %}
                                 <tr>
                                     <td>
                                         <input type="checkbox" id="row1" class="table-row">
-                                        <span class="time">17.00</span>
+                                        <span class="time">{{subscriber.id}}</span>
                                     </td>
-                                    <td>John D</td>
-                                    <td>Sudbury Station</td>
-                                    <td><svg viewBox="-22 0 134 134.06032" fill="currentColor">
-                                            <path d="M23.347656 134.058594C8.445312 84.953125 39.933594 67.023438 39.933594 67.023438c-2.203125 26.203124 12.6875 46.617187 12.6875 46.617187 5.476562-1.652344 15.929687-9.375 15.929687-9.375 0 9.375-5.515625 29.78125-5.515625 29.78125s19.308594-14.929687 25.386719-39.726563c6.070313-24.796874-11.5625-49.691406-11.5625-49.691406 1.0625 17.550782-4.875 34.8125-16.507813 48 .582032-.671875 1.070313-1.417968 1.445313-2.226562 2.089844-4.179688 5.445313-15.042969 3.480469-40.199219C62.511719 14.890625 30.515625 0 30.515625 0c2.757813 21.515625-5.511719 26.472656-24.882813 67.3125-19.371093 40.832031 17.714844 66.746094 17.714844 66.746094zm0 0" />
-                                        </svg></td>
+                                    <td>{{subscriber.uuid}}</td>
+                                    <td>{{subscriber.subscribed_at}}</td>
+                                    <td>{{subscriber.email}}</td>
                                     <td>
-                                        <div class="status is-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        {% if subscriber.status == "enabled" %}
+                                        <div class="status is-green">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <path d="M20 6L9 17l-5-5" />
                                             </svg>
                                             Enabled
                                         </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" id="row2" class="table-row">
-                                        <span class="time">17.00</span>
-                                    </td>
-                                    <td>Rufi</td>
-                                    <td>One Beacon</td>
-                                    <td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
-                                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                                        </svg></td>
-                                    <td>
+                                        {% elif subscriber.status == "disabled" %}
+                                        <div class="status is-wait">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader">
+                                                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                                            </svg>
+                                            Disabled
+                                        </div>
+                                        {% elif subscriber.status == "blacklisted" %}
                                         <div class="status is-red">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <path d="M18 6L6 18M6 6l12 12" />
                                             </svg>
                                             Blacklisted
                                         </div>
+                                        {% endif %}
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" id="row3" class="table-row">
-                                        <span class="time is-wait">17.00</span>
-                                    </td>
-                                    <td>Alfred</td>
-                                    <td>5 Main High</td>
-                                    <td><svg viewBox="-22 0 134 134.06032" fill="currentColor">
-                                            <path d="M23.347656 134.058594C8.445312 84.953125 39.933594 67.023438 39.933594 67.023438c-2.203125 26.203124 12.6875 46.617187 12.6875 46.617187 5.476562-1.652344 15.929687-9.375 15.929687-9.375 0 9.375-5.515625 29.78125-5.515625 29.78125s19.308594-14.929687 25.386719-39.726563c6.070313-24.796874-11.5625-49.691406-11.5625-49.691406 1.0625 17.550782-4.875 34.8125-16.507813 48 .582032-.671875 1.070313-1.417968 1.445313-2.226562 2.089844-4.179688 5.445313-15.042969 3.480469-40.199219C62.511719 14.890625 30.515625 0 30.515625 0c2.757813 21.515625-5.511719 26.472656-24.882813 67.3125-19.371093 40.832031 17.714844 66.746094 17.714844 66.746094zm0 0" />
-                                        </svg></td>
-                                    <td>
-                                        <div class="status is-wait"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader">
-                                                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-                                            </svg>
-                                            Disabled
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" id="row4" class="table-row">
-                                        <span class="time is-wait">17.00</span>
-                                    </td>
-                                    <td>Mike J.</td>
-                                    <td>Brooklyn 99</td>
-                                    <td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
-                                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                                        </svg></td>
-                                    <td>
-                                        <div class="status is-wait"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader">
-                                                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-                                            </svg>
-                                            Disabled
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" id="row5" class="table-row">
-                                        <span class="time">17.00</span>
-                                    </td>
-                                    <td>Hermann B.</td>
-                                    <td>Janburg Station</td>
-                                    <td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
-                                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                                        </svg></td>
-                                    <td>
-                                        <div class="status is-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M20 6L9 17l-5-5" />
-                                            </svg>
-                                            Enabled
-                                        </div>
-                                    </td>
-                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -364,103 +318,24 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>UUID</th>
-                                    <th>Subscribed At</th>
-                                    <th>Email</th>
-                                    <th>Status</th>
+                                    <th>Sent At</th>
+                                    <th>Subject</th>
+                                    <th>Template</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for campaign in campaigns %}
                                 <tr>
                                     <td>
                                         <input type="checkbox" id="row1" class="table-row">
-                                        <span class="time">17.00</span>
+                                        <span class="time">{{campaign.id}}</span>
                                     </td>
-                                    <td>John D</td>
-                                    <td>Sudbury Station</td>
-                                    <td><svg viewBox="-22 0 134 134.06032" fill="currentColor">
-                                            <path d="M23.347656 134.058594C8.445312 84.953125 39.933594 67.023438 39.933594 67.023438c-2.203125 26.203124 12.6875 46.617187 12.6875 46.617187 5.476562-1.652344 15.929687-9.375 15.929687-9.375 0 9.375-5.515625 29.78125-5.515625 29.78125s19.308594-14.929687 25.386719-39.726563c6.070313-24.796874-11.5625-49.691406-11.5625-49.691406 1.0625 17.550782-4.875 34.8125-16.507813 48 .582032-.671875 1.070313-1.417968 1.445313-2.226562 2.089844-4.179688 5.445313-15.042969 3.480469-40.199219C62.511719 14.890625 30.515625 0 30.515625 0c2.757813 21.515625-5.511719 26.472656-24.882813 67.3125-19.371093 40.832031 17.714844 66.746094 17.714844 66.746094zm0 0" />
-                                        </svg></td>
-                                    <td>
-                                        <div class="status is-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M20 6L9 17l-5-5" />
-                                            </svg>
-                                            Enabled
-                                        </div>
-                                    </td>
+                                    <td>{{campaign.uuid}}</td>
+                                    <td>{{campaign.sent_at}}</td>
+                                    <td>{{campaign.subject}}</td>
+                                    <td>{{campaign.template}}</td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" id="row2" class="table-row">
-                                        <span class="time">17.00</span>
-                                    </td>
-                                    <td>Rufi</td>
-                                    <td>One Beacon</td>
-                                    <td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
-                                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                                        </svg></td>
-                                    <td>
-                                        <div class="status is-red">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M18 6L6 18M6 6l12 12" />
-                                            </svg>
-                                            Blacklisted
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" id="row3" class="table-row">
-                                        <span class="time is-wait">17.00</span>
-                                    </td>
-                                    <td>Alfred</td>
-                                    <td>5 Main High</td>
-                                    <td><svg viewBox="-22 0 134 134.06032" fill="currentColor">
-                                            <path d="M23.347656 134.058594C8.445312 84.953125 39.933594 67.023438 39.933594 67.023438c-2.203125 26.203124 12.6875 46.617187 12.6875 46.617187 5.476562-1.652344 15.929687-9.375 15.929687-9.375 0 9.375-5.515625 29.78125-5.515625 29.78125s19.308594-14.929687 25.386719-39.726563c6.070313-24.796874-11.5625-49.691406-11.5625-49.691406 1.0625 17.550782-4.875 34.8125-16.507813 48 .582032-.671875 1.070313-1.417968 1.445313-2.226562 2.089844-4.179688 5.445313-15.042969 3.480469-40.199219C62.511719 14.890625 30.515625 0 30.515625 0c2.757813 21.515625-5.511719 26.472656-24.882813 67.3125-19.371093 40.832031 17.714844 66.746094 17.714844 66.746094zm0 0" />
-                                        </svg></td>
-                                    <td>
-                                        <div class="status is-wait"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader">
-                                                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-                                            </svg>
-                                            Disabled
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" id="row4" class="table-row">
-                                        <span class="time is-wait">17.00</span>
-                                    </td>
-                                    <td>Mike J.</td>
-                                    <td>Brooklyn 99</td>
-                                    <td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
-                                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                                        </svg></td>
-                                    <td>
-                                        <div class="status is-wait"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader">
-                                                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-                                            </svg>
-                                            Disabled
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" id="row5" class="table-row">
-                                        <span class="time">17.00</span>
-                                    </td>
-                                    <td>Hermann B.</td>
-                                    <td>Janburg Station</td>
-                                    <td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
-                                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                                        </svg></td>
-                                    <td>
-                                        <div class="status is-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M20 6L9 17l-5-5" />
-                                            </svg>
-                                            Enabled
-                                        </div>
-                                    </td>
-                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -468,18 +343,28 @@
                 <div class="activity card" style="--delay: .2s">
                     <div class="title">Sent To</div>
                     <div class="subtitle">Recipient emails</div>
+                    <div>{{campaigns[0].sent_to}}</div>
                 </div>
                 <div class="discount card" style="--delay: .4s">
-                    <div class="title">Subject</div>
+                    <div class="title">{{campaigns[0].subject}}</div>
                     <div class="discount-profile">
                         <!--<span class="by">By:</span>-->
-                        <img class="discount-img" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80" alt="">
+                        <!--<img class="discount-img" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80" alt="">-->
+                        <svg class="discount-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 1100">
+                            <foreignObject width="100%" height="100%" style="pointer-events: none">
+                                <div xmlns="http://www.w3.org/1999/xhtml">
+                                    {{campaigns[0].body | safe}}
+                                </div>
+                            </foreignObject>
+                        </svg>
                         <div class="discount-detail">
                             <div class="discount-name">Template UUID</div>
-                            <div class="discount-type">0fjjg-****-8***8-*****</div>
+                            <div class="discount-type">{{campaigns[0].template}}</div>
                         </div>
                     </div>
-                    <div class="button offer-button">Open Template Editor</div>
+                    <a href="/editor">
+                        <div class="button offer-button">Open Template Editor</div>
+                    </a>
                 </div>
             </div>
             <div class="user-box fourth-box" style="display: none;">
@@ -504,23 +389,23 @@
                     </div>
                     <div class="cards card">
                         <label for="MAIL_USERNAME">Mail Username</label>
-                        <input id="MAIL_USERNAME" name="MAIL_USERNAME" placeholder="email account username" type="text">
+                        <input id="MAIL_USERNAME" value="{{campaign_config.MAIL_USERNAME}}" name="MAIL_USERNAME" placeholder="email account username" type="text">
                         <label for="MAIL_PASSWORD">Mail Password</label>
-                        <input id="MAIL_PASSWORD" name="MAIL_PASSWORD" placeholder="email account password" type="password">
+                        <input id="MAIL_PASSWORD" value="{{campaign_config.MAIL_PASSWORD}}" name="MAIL_PASSWORD" placeholder="email account password" type="password">
                         <label for="MAIL_FROM">Mail From</label>
-                        <input id="MAIL_FROM" name="MAIL_FROM" placeholder="user@example.com" type="email">
+                        <input id="MAIL_FROM" value="{{campaign_config.MAIL_FROM}}" name="MAIL_FROM" placeholder="user@example.com" type="email">
                         <label for="MAIL_PORT">Mail Port</label>
-                        <input id="MAIL_PORT" name="MAIL_PORT" placeholder="587" type="number">
+                        <input id="MAIL_PORT" value="{{campaign_config.MAIL_PORT}}" name="MAIL_PORT" placeholder="587" type="number">
                         <label for="MAIL_FROM_NAME">Mail From Name</label>
-                        <input id="MAIL_FROM_NAME" name="MAIL_FROM_NAME" placeholder="Newsletter" type="text">
+                        <input id="MAIL_FROM_NAME" value="{{campaign_config.MAIL_FROM_NAME}}" name="MAIL_FROM_NAME" placeholder="Newsletter" type="text">
                         <label for="MAIL_SERVER">Mail Server</label>
-                        <input id="MAIL_SERVET" name="MAIL_SERVER" placeholder="smtp.gmail.com" type="text">
+                        <input id="MAIL_SERVER" value="{{campaign_config.MAIL_SERVER}}" name="MAIL_SERVER" placeholder="smtp.gmail.com" type="text">
                         <label for="MAIL_TLS">Mail TLS</label>
-                        <input id="MAIL_TLS" name="MAIL_TLS" type="checkbox">
+                        <input id="MAIL_TLS" value="{{campaign_config.MAIL_TLS}}" name="MAIL_TLS" type="checkbox">
                         <label for="MAIL_SSL">Mail SSL</label>
-                        <input id="MAIL_SSL" name="MAIL_SSL" type="checkbox">
+                        <input id="MAIL_SSL" value="{{campaign_config.MAIL_SSL}}" name="MAIL_SSL" type="checkbox">
                         <label for="USE_CREDENTILAS">Use Credentias</label>
-                        <input id="USE_CREDENTILAS" name="USE_CREDENTILAS" type="checkbox">
+                        <input id="USE_CREDENTILAS" value="{{campaign_config.USE_CREDENTILAS}}" name="USE_CREDENTILAS" type="checkbox">
                     </div>
                 </div>
             </div>
@@ -544,9 +429,9 @@
                     </div>
                     <div class="cards card">
                         <label for="companion_url">Companion URL</label>
-                        <input id="companion_url" name="companion_url" placeholder="https://companion.uppy.io" type="text">
+                        <input id="companion_url" name="companion_url" value="{{uppy_config.companion_url}}" placeholder="https://companion.uppy.io" type="text">
                         <label for="endpoint">Endpoint URL</label>
-                        <input id="endpoint" name="endpoint" placeholder="https://tusd.tusdemo.net/files/" type="text">
+                        <input id="endpoint" name="endpoint" value="{{uppy_config.endpoint}}" placeholder="https://tusd.tusdemo.net/files/" type="text">
                     </div>
                 </div>
             </div>
