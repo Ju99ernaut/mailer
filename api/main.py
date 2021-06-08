@@ -4,8 +4,8 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from routes import templates, newsletter
-from grapesjs import editor
+from routes import templates, newsletter, assets, subscribers, campaigns
+from grapesjs import editor, archive, browser_view, dashboard, edit
 
 import config
 import data
@@ -36,7 +36,14 @@ app.mount("/static", StaticFiles(directory="api/static"), name="static")
 
 app.include_router(templates.router)
 app.include_router(newsletter.router)
+app.include_router(assets.router)
+app.include_router(subscribers.router)
+app.include_router(campaigns.router)
 app.include_router(editor.router)
+app.include_router(archive.router)
+app.include_router(browser_view.router)
+app.include_router(dashboard.router)
+app.include_router(edit.router)
 
 
 @app.get("/", include_in_schema=False)
@@ -49,4 +56,9 @@ async def root():
 
 if __name__ == "__main__":
     data.setup()
-    uvicorn.run("main:app", host=config.CONFIG.host, port=int(config.CONFIG.port))
+    uvicorn.run(
+        "main:app",
+        host=config.CONFIG.host,
+        port=int(config.CONFIG.port),
+        reload=bool(config.CONFIG.reload),
+    )

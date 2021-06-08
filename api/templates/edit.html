@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/edit.css') }}">
+    <title>{{action}}</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="card-form">
+            {% if action == "subscribe" %}
+            <div class="card-form__inner">
+                <div class="card-input">
+                    <label for="email" class="card-input__label">Email Address</label>
+                    <input type="email" id="email" placeholder="user@example.com" class="card-input__input" autocomplete="off">
+                </div>
+
+                <button class="card-form__button">
+                    Subscribe
+                </button>
+            </div>
+            {% elif action == "unsubscribe" %}
+            <div class="card-form__inner">
+                <div class="card-input">
+                    <label for="email" class="card-input__label">Email Address</label>
+                    <input type="email" id="email" placeholder="user@example.com" class="card-input__input" autocomplete="off">
+                </div>
+
+                <button class="card-form__button">
+                    Unsubscribe
+                </button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', path='/js/edit.js') }}"></script>
+</body>
+
+</html>
