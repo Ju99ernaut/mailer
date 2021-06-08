@@ -39,3 +39,5 @@ function generateCalendar() {
 }
 
 calendarDates.innerHTML = generateCalendar();
+
+// TODO calendar, dashboard components, authentication functionality
