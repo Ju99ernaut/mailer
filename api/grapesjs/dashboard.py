@@ -1,5 +1,6 @@
-import data
+import data.emails as data
 
+from data.templates import get_default_template
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -17,7 +18,7 @@ async def get_dashboard(request: Request):
     subscribers = data.get_all_emails_unpaginated()
     uppy_config = data.get_uppy_config()
     total_campaigns = data.get_campaign_count()
-    default_template = data.get_default_template()
+    default_template = get_default_template()
     return templates.TemplateResponse(
         "dashboard.html",
         {

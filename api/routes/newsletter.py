@@ -1,4 +1,4 @@
-import data
+import data.emails as data
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import EmailStr

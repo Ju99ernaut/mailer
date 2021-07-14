@@ -1,4 +1,4 @@
-import data
+import data.emails as data
 
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse

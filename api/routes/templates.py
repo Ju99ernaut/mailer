@@ -1,4 +1,4 @@
-import data
+import data.templates as data
 
 from typing import List, Optional
 
