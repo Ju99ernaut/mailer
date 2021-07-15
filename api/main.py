@@ -4,7 +4,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from routes import templates, newsletter, assets, subscribers, campaigns, users
+from routes import templates, newsletter, assets, subscribers, campaigns, users, admin
 from grapesjs import editor, archive, browser_view, dashboard, edit
 
 import config
@@ -45,6 +45,7 @@ app.include_router(browser_view.router)
 app.include_router(dashboard.router)
 app.include_router(edit.router)
 app.include_router(users.router)
+app.include_router(admin.router)
 
 
 @app.get("/", include_in_schema=False)
@@ -56,7 +57,7 @@ async def root():
 
 
 if __name__ == "__main__":
-    setup.admin()
+    # setup.admin()
     setup.migrate()
     uvicorn.run(
         "main:app",
