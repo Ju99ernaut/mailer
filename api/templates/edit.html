@@ -34,6 +34,43 @@
                     Unsubscribe
                 </button>
             </div>
+            {% elif action == "login" %}
+            <div class="card-form__inner">
+                <div class="card-input">
+                    <label for="email" class="card-input__label">Email Address</label>
+                    <input type="email" id="email" placeholder="user@example.com" class="card-input__input" autocomplete="off">
+                </div>
+
+                <div class="card-input">
+                    <label for="email" class="card-input__label">Password</label>
+                    <input type="password" id="password" placeholder="password" class="card-input__input" autocomplete="off">
+                </div>
+
+                <button class="card-form__button">
+                    Login
+                </button>
+            </div>
+            {% elif action == "register" %}
+            <div class="card-form__inner">
+                <div class="card-input">
+                    <label for="email" class="card-input__label">Username</label>
+                    <input type="username" id="username" placeholder="username" class="card-input__input" autocomplete="off">
+                </div>
+
+                <div class="card-input">
+                    <label for="email" class="card-input__label">Email Address</label>
+                    <input type="email" id="email" placeholder="user@example.com" class="card-input__input" autocomplete="off">
+                </div>
+
+                <div class="card-input">
+                    <label for="email" class="card-input__label">Password</label>
+                    <input type="password" id="password" placeholder="password" class="card-input__input" autocomplete="off">
+                </div>
+
+                <button class="card-form__button">
+                    Register
+                </button>
+            </div>
             {% endif %}
         </div>
     </div>
