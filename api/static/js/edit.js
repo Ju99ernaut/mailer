@@ -1,5 +1,5 @@
-var input = document.querySelector('input');
-var btn = document.querySelector('button');
+const input = document.querySelector('input');
+const btn = document.querySelector('button');
 
 window.NewsletterWidget = {
     action(ev) {
@@ -30,5 +30,12 @@ window.NewsletterWidget = {
 btn.addEventListener('click', action);
 
 function action(ev) {
-    fetch('/newsletter/' + ev.currentTarget.innerText.trim().toLowerCase() + '?email=' + input.value);
+    const actionType = ev.currentTarget.innerText.trim().toLowerCase();
+    if (actionType === 'subscribe' || actionType === 'unsubscribe')
+        fetch('/newsletter/' + actionType + '?email=' + input.value);
+    else if (actionType === 'login')
+        return
+    else if (actionType === 'register')
+        return
+    // TODO login/register and redirect
 }
