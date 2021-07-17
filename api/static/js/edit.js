@@ -30,12 +30,30 @@ window.NewsletterWidget = {
 btn.addEventListener('click', action);
 
 function action(ev) {
+    ev.preventDefault();
     const actionType = ev.currentTarget.innerText.trim().toLowerCase();
     if (actionType === 'subscribe' || actionType === 'unsubscribe')
         fetch('/newsletter/' + actionType + '?email=' + input.value);
-    else if (actionType === 'login')
-        return
-    else if (actionType === 'register')
-        return
-    // TODO login/register and redirect
+    else if (actionType === 'login') {
+        const form = document.querySelector('form');
+        fetch('/auth', {
+            method: 'POST',
+            body: new FormData(form)
+        })
+            .then(res => res.json())
+            .then(res => console.log(res))// TODO redirect to dashboard, editor etc
+            .catch(err => console.log(err));
+    }
+    else if (actionType === 'register') {
+        const username = document.querySelector('#username').value;
+        const email = document.querySelector('#email').value;
+        const password = document.querySelector('#password').value;
+        fetch('/register', {
+            method: 'POST',
+            body: JSON.stringify({ username, email, password })
+        })
+            .then(res => res.json())
+            .then(res => console.log(res))// TODO redirect to login
+            .catch(err => console.log(err));
+    }
 }
