@@ -614,6 +614,7 @@ svg.profile-img {
     display: flex;
     align-items: center;
     margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 .discount-img {
@@ -726,6 +727,7 @@ svg.profile-img {
     border-radius: 50%;
     padding: 5px;
     width: 30px;
+    cursor: pointer;
 }
 
 .cards-wrapper {
@@ -789,6 +791,7 @@ svg.profile-img {
     flex: 0 1 calc(100% / 7);
     padding: 10px 5px;
     text-align: center;
+    cursor: pointer;
 }
 
 .item.is-active {
@@ -845,6 +848,7 @@ svg.profile-img {
     position: relative;
 }
 
+.account-profile svg,
 .account-profile img {
     width: 84px;
     height: 84px;
@@ -1191,7 +1195,7 @@ svg.profile-img {
     .first-box .cards-wrapper .item.is-active,
     .third-box .cards-wrapper .item.is-active {
         background: none;
-        color: inherit;
+        color: #4255d4;
     }
 
     .first-box .account-wrapper,
