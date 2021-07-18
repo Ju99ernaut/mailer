@@ -393,24 +393,26 @@
                         </div>
                     </div>
                     <div class="cards card">
-                        <label for="MAIL_USERNAME">Mail Username</label>
-                        <input id="MAIL_USERNAME" value="{{campaign_config.MAIL_USERNAME}}" name="MAIL_USERNAME" placeholder="email account username" type="text">
-                        <label for="MAIL_PASSWORD">Mail Password</label>
-                        <input id="MAIL_PASSWORD" value="{{campaign_config.MAIL_PASSWORD}}" name="MAIL_PASSWORD" placeholder="email account password" type="password">
-                        <label for="MAIL_FROM">Mail From</label>
-                        <input id="MAIL_FROM" value="{{campaign_config.MAIL_FROM}}" name="MAIL_FROM" placeholder="user@example.com" type="email">
-                        <label for="MAIL_PORT">Mail Port</label>
-                        <input id="MAIL_PORT" value="{{campaign_config.MAIL_PORT}}" name="MAIL_PORT" placeholder="587" type="number">
-                        <label for="MAIL_FROM_NAME">Mail From Name</label>
-                        <input id="MAIL_FROM_NAME" value="{{campaign_config.MAIL_FROM_NAME}}" name="MAIL_FROM_NAME" placeholder="Newsletter" type="text">
-                        <label for="MAIL_SERVER">Mail Server</label>
-                        <input id="MAIL_SERVER" value="{{campaign_config.MAIL_SERVER}}" name="MAIL_SERVER" placeholder="smtp.gmail.com" type="text">
-                        <label for="MAIL_TLS">Mail TLS</label>
-                        <input id="MAIL_TLS" value="{{campaign_config.MAIL_TLS}}" name="MAIL_TLS" type="checkbox">
-                        <label for="MAIL_SSL">Mail SSL</label>
-                        <input id="MAIL_SSL" value="{{campaign_config.MAIL_SSL}}" name="MAIL_SSL" type="checkbox">
-                        <label for="USE_CREDENTILAS">Use Credentias</label>
-                        <input id="USE_CREDENTILAS" value="{{campaign_config.USE_CREDENTILAS}}" name="USE_CREDENTILAS" type="checkbox">
+                        <form class="campaign-config">
+                            <label for="MAIL_USERNAME">Mail Username</label>
+                            <input id="MAIL_USERNAME" value="{{campaign_config.MAIL_USERNAME}}" name="MAIL_USERNAME" placeholder="email account username" type="text">
+                            <label for="MAIL_PASSWORD">Mail Password</label>
+                            <input id="MAIL_PASSWORD" value="{{campaign_config.MAIL_PASSWORD}}" name="MAIL_PASSWORD" placeholder="email account password" type="password">
+                            <label for="MAIL_FROM">Mail From</label>
+                            <input id="MAIL_FROM" value="{{campaign_config.MAIL_FROM}}" name="MAIL_FROM" placeholder="user@example.com" type="email">
+                            <label for="MAIL_PORT">Mail Port</label>
+                            <input id="MAIL_PORT" value="{{campaign_config.MAIL_PORT}}" name="MAIL_PORT" placeholder="587" type="number">
+                            <label for="MAIL_FROM_NAME">Mail From Name</label>
+                            <input id="MAIL_FROM_NAME" value="{{campaign_config.MAIL_FROM_NAME}}" name="MAIL_FROM_NAME" placeholder="Newsletter" type="text">
+                            <label for="MAIL_SERVER">Mail Server</label>
+                            <input id="MAIL_SERVER" value="{{campaign_config.MAIL_SERVER}}" name="MAIL_SERVER" placeholder="smtp.gmail.com" type="text">
+                            <label for="MAIL_TLS">Mail TLS</label>
+                            <input id="MAIL_TLS" value="{{campaign_config.MAIL_TLS}}" name="MAIL_TLS" type="checkbox">
+                            <label for="MAIL_SSL">Mail SSL</label>
+                            <input id="MAIL_SSL" value="{{campaign_config.MAIL_SSL}}" name="MAIL_SSL" type="checkbox">
+                            <label for="USE_CREDENTILAS">Use Credentias</label>
+                            <input id="USE_CREDENTILAS" value="{{campaign_config.USE_CREDENTILAS}}" name="USE_CREDENTILAS" type="checkbox">
+                        </form>
                     </div>
                 </div>
             </div>
@@ -433,10 +435,12 @@
                         </div>
                     </div>
                     <div class="cards card">
-                        <label for="companion_url">Companion URL</label>
-                        <input id="companion_url" name="companion_url" value="{{uppy_config.companion_url}}" placeholder="https://companion.uppy.io" type="text">
-                        <label for="endpoint">Endpoint URL</label>
-                        <input id="endpoint" name="endpoint" value="{{uppy_config.endpoint}}" placeholder="https://tusd.tusdemo.net/files/" type="text">
+                        <form class="uppy-config">
+                            <label for="companion_url">Companion URL</label>
+                            <input id="companion_url" name="companion_url" value="{{uppy_config.companion_url}}" placeholder="https://companion.uppy.io" type="text">
+                            <label for="endpoint">Endpoint URL</label>
+                            <input id="endpoint" name="endpoint" value="{{uppy_config.endpoint}}" placeholder="https://tusd.tusdemo.net/files/" type="text">
+                        </form>
                     </div>
                 </div>
             </div>

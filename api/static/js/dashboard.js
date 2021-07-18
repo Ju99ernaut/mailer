@@ -90,7 +90,6 @@ saveCampaignConfigBtn.addEventListener('click', updateCampaignConfig);
 saveUppyConfigBtn.addEventListener('click', updateUppyConfig);
 
 function updateCampaignConfig() {
-    ev.preventDefault();
     const form = document.querySelector('form.campaign-config');
     fetch('/campaigns/setup', {
         method: 'POST',
@@ -101,9 +100,7 @@ function updateCampaignConfig() {
         .catch(err => console.log(err));
 }
 
-
 function updateUppyConfig() {
-    ev.preventDefault();
     const form = document.querySelector('form.uppy-config');
     fetch('/assets/uppy', {
         method: 'POST',
