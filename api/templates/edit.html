@@ -36,14 +36,20 @@
             </div>
             {% elif action == "login" %}
             <div class="card-form__inner">
-                <div class="card-input">
-                    <label for="username class=" card-input__label">Username</label>
-                    <input type="text" id="username" placeholder="username" class="card-input__input" autocomplete="off">
-                </div>
+                <form>
+                    <div class="card-input">
+                        <label for="username class=" card-input__label">Username</label>
+                        <input type="text" id="username" name="username" placeholder="username" class="card-input__input" autocomplete="off">
+                    </div>
 
-                <div class="card-input">
-                    <label for="email" class="card-input__label">Password</label>
-                    <input type="password" id="password" placeholder="password" class="card-input__input" autocomplete="off">
+                    <div class="card-input">
+                        <label for="email" class="card-input__label">Password</label>
+                        <input type="password" id="password" name="password" placeholder="password" class="card-input__input" autocomplete="off">
+                    </div>
+                </form>
+
+                <div class="link">
+                    <a href="/edit/register">Register?</a>
                 </div>
 
                 <button class="card-form__button">
@@ -65,6 +71,10 @@
                 <div class="card-input">
                     <label for="email" class="card-input__label">Password</label>
                     <input type="password" id="password" placeholder="password" class="card-input__input" autocomplete="off">
+                </div>
+
+                <div class="link">
+                    <a href="/edit/login">Already have an account?</a>
                 </div>
 
                 <button class="card-form__button">

@@ -30,7 +30,6 @@ window.NewsletterWidget = {
 btn.addEventListener('click', action);
 
 function action(ev) {
-    ev.preventDefault();
     const actionType = ev.currentTarget.innerText.trim().toLowerCase();
     if (actionType === 'subscribe' || actionType === 'unsubscribe')
         fetch('/newsletter/' + actionType + '?email=' + input.value);
@@ -41,19 +40,37 @@ function action(ev) {
             body: new FormData(form)
         })
             .then(res => res.json())
-            .then(res => console.log(res))// TODO redirect to dashboard, editor etc
+            .then(res => {
+                if (res.access_token === 200) {
+                    localStorage.setItem('token', JSON.stringify(res));
+                    window.location.replace('/dashboard');
+                } else {
+                    form.reset();
+                }
+            })
             .catch(err => console.log(err));
     }
     else if (actionType === 'register') {
-        const username = document.querySelector('#username').value;
-        const email = document.querySelector('#email').value;
-        const password = document.querySelector('#password').value;
+        const usernameEl = document.querySelector('#username');
+        const emailEl = document.querySelector('#email');
+        const passwordEl = document.querySelector('#password');
+        const username = usernameEl.value;
+        const email = emailEl.value;
+        const password = passwordEl.value;
+
         fetch('/register', {
             method: 'POST',
             body: JSON.stringify({ username, email, password })
         })
-            .then(res => res.json())
-            .then(res => console.log(res))// TODO redirect to login
+            .then(res => {
+                if (res.status === 200) {
+                    window.location.replace('/edit/login')
+                } else {
+                    usernameEl.value = '';
+                    emailEl.value = '';
+                    passwordEl.value = '';
+                }
+            })
             .catch(err => console.log(err));
     }
 }
