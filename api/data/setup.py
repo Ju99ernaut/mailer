@@ -59,9 +59,9 @@ def admin(db):
 @connect_db
 def migrate(db):
     users_table = db[USERS_TABLE]
-    users_table.create_column(USERNAME_KEY, db.types.text, unique=True, nullable=False)
-    users_table.create_column(EMAIL_KEY, db.types.text, unique=True, nullable=False)
+    users_table.create_column(USERNAME_KEY, db.types.string, unique=True, nullable=False)
+    users_table.create_column(EMAIL_KEY, db.types.string, unique=True, nullable=False)
 
     emails_table = db[EMAILS_TABLE]
-    emails_table.create_column(EMAIL_KEY, db.types.text, unique=True, nullable=False)
-    db.create_table(TEMPLATES_TABLE, primary_id=IDX_KEY, primary_type=db.types.text)
+    emails_table.create_column(EMAIL_KEY, db.types.string, unique=True, nullable=False)
+    db.create_table(TEMPLATES_TABLE, primary_id=IDX_KEY, primary_type=db.types.string)
