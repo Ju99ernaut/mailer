@@ -116,7 +116,7 @@ More information about fastapi dependencies can be found [here](https://fastapi.
 | `POOL_SIZE` | Connection pool size | `false` |
 | `MAX_OVERFLOW` | max_connections = pool_size + max_overflow | `false` |
 | `FRONTEND_URLS` | Comma separated whitelisted domains | `false` |
-| `SECRET_KEY` | Application secret key(Not required but important to setup to avoid using default) | false |
+| `SECRET_KEY` | Application secret key(Not required but important to setup to avoid using default) | `false` |
 
 ### Config Variables
 
