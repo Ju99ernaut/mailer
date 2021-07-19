@@ -57,7 +57,7 @@ async def root():
 
 
 if __name__ == "__main__":
-    # setup.admin()
+    setup.admin()
     setup.migrate()
     uvicorn.run(
         "main:app",
