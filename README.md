@@ -38,7 +38,7 @@ Run
 $ python api/main.py --mail_username user@gmail.com --mail_password password
 ```
 
-More config vars in `api/config.py` and enviroment vars in `app.json`.
+More config vars in [`config.py`](api/config.py) and enviroment vars in [`app.json`](app.json).
 
 Update [`grapesjs`](https://github.com/artf/grapesjs) init and plugins in [`editor.html`](api/templates/editor.html), for example switching out the [`grapesjs-preset-newsletter`](https://github.com/artf/grapesjs-preset-newsletter) with [`grapesjs-mjml`](https://github.com/artf/grapesjs-mjml).
 
@@ -102,10 +102,17 @@ The API should now be available for development at `http://127.0.0.1:8000` and t
 
 Depending on the type of database backend, you may also need to install a database specific driver package. For `MySQL`, this is `MySQLdb`, for `Postgres` its `psycopg2`. SQLite support is integrated into Python. By default `psycopg2` will be installed, if you're using `MySQL` then replace `psycopg2` with `MySQLdb` in `requirements.txt`.
 
+Recomended python version in [runtime.txt](runtime.txt)
+
 ### Using the users system
 
-By default none of the API endpoints require authentication you can apply the built-in [dependencies](api/dependencies.py) to some of the endpoints so the require authentication or admin privileges.
-The first user to register gains the admin role. Some admin only endpoints can be found in [routes/admin.py](api/routes/admin.py).
+By default none of the API endpoints require authentication you can apply the built-in [dependencies](api/dependencies.py) to some of the endpoints so the require authentication or admin privileges. You can add an admin user using the command below:
+
+```sh
+$ python api/manage.py add_admin_user
+```
+
+Some admin only endpoints can be found in [routes/admin.py](api/routes/admin.py).
 More information about fastapi dependencies can be found [here](https://fastapi.tiangolo.com/tutorial/dependencies/).
 
 ### Enviroment Variables
@@ -134,7 +141,56 @@ Config variables can be placed inside a `config.txt` file, check [`example-confi
 $ python api/main.py --host 0.0.0.0 --port 5467
 ```
 
-Recomended python version in [runtime.txt](runtime.txt)
+### Template endpoints
+
+Template files can be found in the [`templates`](api/templates) folder. :warning: May need to implement authentication for some endpoints
+
+| `Endpoint` | `Description` |
+|------------|---------------|
+| `/archive` | Links to all sent newsletters |
+| `/viewer/{uuid}` | Browser view of template with given UUID |
+| `/dashboard` | Admin dashboard template |
+| `/editor` | Newsletter editor webapp |
+| `/edit/subscribe` | Form to subscribe to newsletter |
+| `/edit/unsubscribe` | Form to unsubscribe to newsletter |
+| `/edit/register` | User registration form template |
+| `/edit/login` | User login form template |
+
+### Subscribe/Unsubscribe widget
+
+Usage example:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="BASE_URL/static/css/edit.css">
+    <title>Website</title>
+</head>
+
+<body>
+    <div id="nl-form"></div>
+
+    <script src="BASE_URL/static/js/edit.js"></script>
+
+    <script>
+        const container = document.querySelector('#nl-form');
+        const widget = new NewsletterWidget({ container });
+    </script>
+</body>
+```
+
+#### Options
+
+| `Option` | `Description` | `Default` |
+|----------|---------------|-----------|
+| `container` | `Selector` or `HTMLElement` to append the widget | `body` |
+| `type` | Type of widget, `subscribe` or `unsubscribe` | `subscribe` |
+
 
 ## License
 
