@@ -46,13 +46,14 @@ async def register_user(user: RegisterUser):
         data={"sub": user[EMAIL_KEY]}, expires_delta=access_token_expires
     )
     backend = os.getenv("BACKEND_URL") or config.CONFIG.backend
-    await send_email(
-        user[EMAIL_KEY],
-        {
-            "username": user[USERNAME_KEY],
-            "confirm_url": f"{backend}/confirm/{confirm_token}",
-        },
-    )
+    if backend:
+        await send_email(
+            user[EMAIL_KEY],
+            {
+                "username": user[USERNAME_KEY],
+                "confirm_url": f"{backend}/confirm/{confirm_token}",
+            },
+        )
     return return_user
 
 
@@ -78,6 +79,8 @@ async def confirm_email_token(
 ):
     frontend = os.getenv("FRONTEND_URL") or config.CONFIG.frontend
     email = await get_email(token)
+    if not frontend:
+        return {"msg": "No frontend to redirect to"}
     if email == "expired":
         return RedirectResponse(url=f"{frontend}/?status=expired")
     user = data.get_user_by_email(email)
@@ -95,13 +98,14 @@ async def regenerate_confirm_email(user: User = Depends(get_current_user)):
         data={"sub": user[EMAIL_KEY]}, expires_delta=access_token_expires
     )
     backend = os.getenv("BACKEND_URL") or config.CONFIG.backend
-    await send_email(
-        user[EMAIL_KEY],
-        {
-            "username": user[USERNAME_KEY],
-            "confirm_url": f"{backend}/confirm/{confirm_token}",
-        },
-    )
+    if backend:
+        await send_email(
+            user[EMAIL_KEY],
+            {
+                "username": user[USERNAME_KEY],
+                "confirm_url": f"{backend}/confirm/{confirm_token}",
+            },
+        )
     return {"msg": "resent"}
 
 
