@@ -5,10 +5,10 @@ window.NewsletterWidget = {
     action(ev) {
         fetch('/newsletter/' + this.type + '?email=' + this.input.value);
     },
-    init(options) {
+    init(options = { type: 'subscribe', container: 'body' }) {
         this.type = options.type || 'subscribe';
         if (typeof options.container === 'string') {
-            options.container = document.querySelector(options.container);
+            options.container = document.querySelector(options.container || 'body');
         }
         this.container = options.container;
         const cont = document.createElement('div');

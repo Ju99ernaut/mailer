@@ -82,7 +82,6 @@ function deactivateAllDates() {
     }
 };
 
-// TODO mail config
 const saveCampaignConfigBtn = document.querySelector('.fourth-box .cards-button.button');
 const saveUppyConfigBtn = document.querySelector('.fifth-box .cards-button.button');
 
