@@ -1,4 +1,4 @@
-import data
+import data.emails as data
 
 from uuid import UUID
 from fastapi import APIRouter, Request, Path

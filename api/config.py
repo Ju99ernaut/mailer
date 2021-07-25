@@ -13,7 +13,12 @@ arg_parser.add(
     help="An SQLAlchemy connection string",
 )
 
-arg_parser.add("-r", "--reload", default=False, help="Reloads server onsave, for easier development")
+arg_parser.add(
+    "-r",
+    "--reload",
+    default=False,
+    help="Reloads server onsave, for easier development",
+)
 
 arg_parser.add("--host", default="127.0.0.1", help="Bind socket to this host")
 
@@ -24,4 +29,4 @@ arg_parser.add("--prefix", default="gjs-", help="storage prefix")
 
 def parse_args():
     global CONFIG
-    CONFIG = arg_parser.parse_args()
+    CONFIG, unknown = arg_parser.parse_known_args()

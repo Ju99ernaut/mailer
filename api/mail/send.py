@@ -1,10 +1,15 @@
 import data
 
 from typing import List
-from pydantic import EmailStr
+from pydantic import BaseModel, EmailStr, AnyHttpUrl
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
 
 # from fastapi_mail.email_utils import DefaultChecker
+
+
+class Body(BaseModel):
+    username: str
+    confirm_url: AnyHttpUrl
 
 
 def get_config():
@@ -49,3 +54,7 @@ async def use_template(to: List[EmailStr], subject: str, body: dict, template: s
     if conf:
         fm = FastMail(conf)
         await fm.send_message(message, template=template)
+
+
+async def user(to: EmailStr, body: Body):
+    await use_template([to], "Confirm your email address", body, "email_template.html")

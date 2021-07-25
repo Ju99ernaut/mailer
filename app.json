@@ -1,8 +1,8 @@
 {
-    "name": "super-fastapi",
-    "description": "REST API boilerplate using fastapi",
+    "name": "mailer",
+    "description": "REST API using fastapi",
     "keywords": ["fastapi"],
-    "repository": "https://github.com/Ju99ernaut/super-fastapi",
+    "repository": "https://github.com/Ju99ernaut/mailer",
     "addons": [
         "heroku-postgresql:hobby-dev"
     ],
@@ -17,7 +17,12 @@
         },
         "FRONTEND_URLS": {
             "description": "Whitelist frontend urls that can add emails to database",
-            "value": "https://front.end,https://front2.end"
+            "value": "https://front.end,https://front2.end",
+            "required": false
+        },
+        "SECRET_KEY": {
+            "description": "Application secret key",
+            "generator": "secret"
         }
     }
 }

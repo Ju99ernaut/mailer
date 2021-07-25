@@ -9,6 +9,8 @@ router = APIRouter(prefix="/edit", include_in_schema=False)
 class Action(str, Enum):
     subscribe = "subscribe"
     unsubscribe = "unsubscribe"
+    login = "login"
+    register = "register"
 
 
 templates = Jinja2Templates(directory="api/templates")

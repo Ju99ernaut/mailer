@@ -1,14 +1,14 @@
-var input = document.querySelector('input');
-var btn = document.querySelector('button');
+const input = document.querySelector('input');
+const btn = document.querySelector('button');
 
 window.NewsletterWidget = {
     action(ev) {
         fetch('/newsletter/' + this.type + '?email=' + this.input.value);
     },
-    init(options) {
+    init(options = { type: 'subscribe', container: 'body' }) {
         this.type = options.type || 'subscribe';
         if (typeof options.container === 'string') {
-            options.container = document.querySelector(options.container);
+            options.container = document.querySelector(options.container || 'body');
         }
         this.container = options.container;
         const cont = document.createElement('div');
@@ -30,5 +30,47 @@ window.NewsletterWidget = {
 btn.addEventListener('click', action);
 
 function action(ev) {
-    fetch('/newsletter/' + ev.currentTarget.innerText.trim().toLowerCase() + '?email=' + input.value);
+    const actionType = ev.currentTarget.innerText.trim().toLowerCase();
+    if (actionType === 'subscribe' || actionType === 'unsubscribe')
+        fetch('/newsletter/' + actionType + '?email=' + input.value);
+    else if (actionType === 'login') {
+        const form = document.querySelector('form');
+        fetch('/auth', {
+            method: 'POST',
+            body: new FormData(form)
+        })
+            .then(res => res.json())
+            .then(res => {
+                if (res.access_token === 200) {
+                    localStorage.setItem('token', JSON.stringify(res));
+                    window.location.replace('/dashboard');
+                } else {
+                    form.reset();
+                }
+            })
+            .catch(err => console.log(err));
+    }
+    else if (actionType === 'register') {
+        const usernameEl = document.querySelector('#username');
+        const emailEl = document.querySelector('#email');
+        const passwordEl = document.querySelector('#password');
+        const username = usernameEl.value;
+        const email = emailEl.value;
+        const password = passwordEl.value;
+
+        fetch('/register', {
+            method: 'POST',
+            body: JSON.stringify({ username, email, password })
+        })
+            .then(res => {
+                if (res.status === 200) {
+                    window.location.replace('/edit/login')
+                } else {
+                    usernameEl.value = '';
+                    emailEl.value = '';
+                    passwordEl.value = '';
+                }
+            })
+            .catch(err => console.log(err));
+    }
 }

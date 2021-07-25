@@ -1,4 +1,4 @@
-import data
+import data.emails as data
 
 from uuid import UUID
 from typing import List, Optional

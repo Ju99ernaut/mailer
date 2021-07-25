@@ -11,6 +11,57 @@ import config
 config.parse_args()
 
 
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+    expires_in: Optional[int] = 3600
+
+
+class TokenData(BaseModel):
+    username: Optional[str] = None
+
+
+class RoleName(str, Enum):
+    user = "user"
+    admin = "admin"
+
+
+class UserRef(BaseModel):
+    id: Optional[int] = 1
+    username: str
+    joined: Optional[datetime] = None
+    active: bool
+
+
+class User(UserRef):
+    email: EmailStr
+    role: RoleName
+
+
+class UpdateUser(BaseModel):
+    def __getitem__(self, item):
+        return getattr(self, item)
+
+    username: Optional[str] = None
+    email: Optional[EmailStr] = None
+
+    @validator("username")
+    def no_space(cls, v):
+        if " " in v:
+            raise ValueError("value must not contain spaces")
+        return v
+
+
+class RegisterUser(UpdateUser):
+    username: str
+    email: EmailStr
+    password: str
+
+
+class UserInDB(User):
+    password: str
+
+
 class Template(BaseModel):
     id: Optional[str] = ""
     idx: UUID = Field(default_factory=uuid4)

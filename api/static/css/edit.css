@@ -2,6 +2,7 @@ body {
     background: #ddeefc;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
+    overflow: hidden;
 }
 
 * {
@@ -125,4 +126,15 @@ body {
     background-position: 90% center;
     background-repeat: no-repeat;
     padding-right: 30px;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.link a {
+    color: #2364d2;
 }
